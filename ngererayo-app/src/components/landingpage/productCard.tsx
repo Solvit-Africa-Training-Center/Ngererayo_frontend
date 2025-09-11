@@ -1,14 +1,22 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Product } from '@/type/index';
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+
+    const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${product.id}`);
+  };
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+    <div onClick={handleClick}
+    className="bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-lg transition">
       <div className="h-48 bg-green-100 relative">
         <img 
           src={product.image} 

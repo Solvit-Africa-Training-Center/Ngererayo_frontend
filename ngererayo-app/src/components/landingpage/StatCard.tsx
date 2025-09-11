@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatItem } from '@/types';
+import { StatItem } from '../../type/index';
 
 interface StatCardProps {
   stat: StatItem;

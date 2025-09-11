@@ -35,68 +35,6 @@ export const CATEGORIES: Category[] = [
   { id: 6, name: 'Spices', icon: '🌶️', productCount: 87 },
 ];
 
-export const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: 'Fresh Tomatoes',
-    category: 'Vegetables',
-    price: 'RWF 1,500',
-    rating: 4,
-    image: '/api/placeholder/300/200',
-    farmer: 'Green Fields Farm',
-    description: 'Freshly picked organic tomatoes from local farms'
-  },
-  {
-    id: 2,
-    name: 'Organic Avocados',
-    category: 'Fruits',
-    price: 'RWF 2,000',
-    rating: 5,
-    image: '/api/placeholder/300/200',
-    farmer: 'Sunshine Organics',
-    description: 'Creamy organic avocados, perfect for guacamole'
-  },
-  {
-    id: 3,
-    name: 'Sweet Potatoes',
-    category: 'Vegetables',
-    price: 'RWF 1,200',
-    rating: 4,
-    image: '/api/placeholder/300/200',
-    farmer: 'Roots & Shoots',
-    description: 'Naturally sweet and nutritious sweet potatoes'
-  },
-  {
-    id: 4,
-    name: 'Fresh Maize',
-    category: 'Cereals',
-    price: 'RWF 800',
-    rating: 3,
-    image: '/api/placeholder/300/200',
-    farmer: 'Golden Harvest',
-    description: 'Fresh maize, perfect for boiling or roasting'
-  },
-  {
-    id: 5,
-    name: 'Bell Peppers',
-    category: 'Vegetables',
-    price: 'RWF 1,800',
-    rating: 5,
-    image: '/api/placeholder/300/200',
-    farmer: 'Colorful Crops',
-    description: 'Colorful bell peppers in red, yellow and green'
-  },
-  {
-    id: 6,
-    name: 'Bananas',
-    category: 'Fruits',
-    price: 'RWF 1,000',
-    rating: 4,
-    image: '/api/placeholder/300/200',
-    farmer: 'Tropical Delights',
-    description: 'Sweet and ripe bananas from local plantations'
-  }
-];
 
 export const TESTIMONIALS: Testimonial[] = [
   {

@@ -4,7 +4,8 @@ import LandingPage from './pages/landingPage/Home';
 import RegisterForm from './components/authontication/RegisterForm'; 
 import LoginForm from './components/authontication/LoginForm';
 import ContactPage from './pages/landingPage/ContactPage';
-import BuyerHomeDashboard from './pages/BuyerDashboard/HomePage'
+import BuyerHomeDashboard from './pages/BuyerDashboard/HomePage';
+import ProductDetailPage from "./components/landingpage/ProductDetail";
 
 
 const App: React.FC = () => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
 
 
 
