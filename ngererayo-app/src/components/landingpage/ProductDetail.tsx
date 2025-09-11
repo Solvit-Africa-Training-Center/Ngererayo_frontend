@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Star, MapPin, CheckCircle, MessageSquare } from "lucide-react";
 import Header from "../authontication/AuthHeader";
+import Footer from "./Footer";
 
 interface Product {
   id: number;
@@ -96,6 +97,7 @@ const ProductDetailPage: React.FC = () => {
         </div>
       </div>
     </div>
+    <Footer />
     </div>
   );
 };
