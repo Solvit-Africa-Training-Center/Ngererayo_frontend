@@ -9,7 +9,7 @@ const ProductsSection: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("https://degreat1.pythonanywhere.com/market/all-products/")
+      .get("https://ngererayo-backend.onrender.com/market/all-products/")
       .then((res) => {
         setProducts(res.data);
         setLoading(false);
@@ -44,7 +44,7 @@ const ProductsSection: React.FC = () => {
                   category: product.owner?.farming_name || "Unknown",
                   price: `RWF ${product.price}`,
                   rating: 4, // Default rating since API doesn't send one
-                  image: `https://degreat1.pythonanywhere.com${product.product_image}`,
+                  image: `https://ngererayo-backend.onrender.com${product.product_image}`,
                   farmer: product.owner?.farming_name || "Unknown Farmer",
                   description: product.description,
                 }}

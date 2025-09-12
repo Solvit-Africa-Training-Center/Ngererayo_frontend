@@ -39,7 +39,7 @@ const RegisterForm: React.FC = () => {
         phone,
         password,
         confirm_password: confirm,
-        role: "farmer",
+        role: "buyer",
       });
 
       toast.success("Account created successfully!");

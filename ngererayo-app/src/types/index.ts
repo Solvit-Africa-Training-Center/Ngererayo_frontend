@@ -22,7 +22,7 @@ export interface Product {
 }
 
 
-export interface Testimonial {
+export default interface Testimonial {
   id: number;
   name: string;
   role: string;
