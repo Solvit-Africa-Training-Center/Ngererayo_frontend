@@ -1,4 +1,4 @@
-import { Product, Testimonial, Category, Farmer, StatItem } from '../';
+import { Product, Testimonial, Category, Farmer, StatItem } from '../type/index';
 
 import { Users, TrendingUp, Smile, Headphones } from 'lucide-react';
 export const APP_NAME = 'NGERERAYO';

@@ -1,9 +1,12 @@
 import React from "react";
-import { ShoppingBag, DollarSign, MessageSquare, Search } from "lucide-react";
+import { ShoppingBag, DollarSign, MessageSquare, Search, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/landingpage/Footer";
 import Header from "../../components/landingpage/Header";
 
 export default function HomeDashboard() {
+  const navigate = useNavigate();
+  
   return (
 
      <div>
@@ -58,6 +61,13 @@ export default function HomeDashboard() {
             <button className="flex items-center gap-3 w-full border border-gray-300 rounded-lg p-3 hover:bg-gray-50">
               <Search className="text-green-500" />
               <span>Find seeds and organic food</span>
+            </button>
+            <button 
+              onClick={() => navigate('/cart')}
+              className="flex items-center gap-3 w-full border border-gray-300 rounded-lg p-3 hover:bg-gray-50"
+            >
+              <ShoppingCart className="text-blue-500" />
+              <span>View Cart</span>
             </button>
             <button className="flex items-center gap-3 w-full border border-gray-300 rounded-lg p-3 hover:bg-gray-50">
               <MessageSquare className="text-purple-500" />
