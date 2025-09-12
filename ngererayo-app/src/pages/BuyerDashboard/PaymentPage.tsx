@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import Header from '../../components/landingpage/Header';
 import Footer from '../../components/landingpage/Footer';
-import PaymentMethodCard from '../../components/payment/PaymentMethodCard';
-import OrderSummaryCard from '../../components/payment/OrderSummaryCard';
+
 import MobileNumberInput, { validateRwandanPhone } from '../../components/payment/MobileNumberInput';
 import { PaymentMethod, PaymentData } from '../../type/payment';
 
@@ -89,7 +87,7 @@ const PaymentPage: React.FC = () => {
       <Header />
       
       <div className="container mx-auto px-4 py-20">
-        <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm p-8">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-xl/20 p-8">
           <h1 className="text-2xl font-bold mb-8">Payment</h1>
           
           {/* Order Summary */}
