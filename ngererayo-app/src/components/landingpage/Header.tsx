@@ -14,10 +14,13 @@ import {
   Store,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 import logo from '../../assets/images/LOGO.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getCartItemCount } = useCart();
+  const cartCount = getCartItemCount();
 
   const navLinks = [
     { name: 'Marketplace', path: '#marketplace', icon: <Store size={16} /> },
@@ -89,9 +92,14 @@ const Header: React.FC = () => {
             <span>EN</span>
           </button>
 
-          <button className="text-black hover:text-green-600">
+          <Link to="/cart" className="text-black hover:text-green-600 relative">
             <ShoppingCart size={20} />
-          </button>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </Link>
           <button className="text-black hover:text-green-600">
             <Bell size={20} />
           </button>
@@ -137,7 +145,9 @@ const Header: React.FC = () => {
 
           <div className="flex space-x-4 mt-4">
             <Search size={20} />
-            <ShoppingCart size={20} />
+            <Link to="/cart" onClick={() => setIsMenuOpen(false)}>
+              <ShoppingCart size={20} />
+            </Link>
             <Bell size={20} />
             <User size={20} />
           </div>

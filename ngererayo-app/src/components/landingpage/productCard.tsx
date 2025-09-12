@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import { useCart } from '../../context/CartContext';
 import { Product } from '@/type/index';
 import { useNavigate } from "react-router-dom";
 
@@ -9,10 +10,25 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
+
     const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/product/${product.id}`);
+  };
+
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price.replace('RWF ', '').replace(',', '')),
+      image: product.image,
+      sellerId: 'farmer1',
+      sellerName: product.farmer,
+      unit: 'piece'
+    });
   };
   return (
     <div onClick={handleClick}
@@ -42,7 +58,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ))}
           </div>
         </div>
-        <button className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition">
+        <button 
+          onClick={handleAddToCart}
+          className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition"
+        >
           Add to Cart
         </button>
       </div>
