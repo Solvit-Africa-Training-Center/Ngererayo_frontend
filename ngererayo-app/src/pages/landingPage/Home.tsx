@@ -30,9 +30,9 @@ const Home: React.FC = () => {
   }}
 >
   {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-900 opacity-80"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-yellow-800 opacity-80"></div>
 
-  <div className="container mx-auto px-4 relative z-10">
+  <div className="container mx-auto px-4 py-20 relative z-10">
     <div className="max-w-2xl">
       <h1 className="text-4xl md:text-5xl font-bold mb-4">
         Welcome to <br />
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
             onClick={() => navigate('/register')}
             className="bg-yellow-400 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100 hover:text-black  cursor-pointer transition"
           >
-            Sign up Now
+            Sign up Now →
           </button>
         <button  onClick={() => navigate('/login')}
          className="bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100 hover:text-black transition cursor-pointer">

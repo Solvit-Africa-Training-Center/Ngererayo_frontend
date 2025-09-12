@@ -17,11 +17,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div onClick={handleClick}
     className="bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-lg transition">
-      <div className="h-48 bg-green-100 relative">
+      <div className="h-48 bg-white relative">
         <img 
           src={product.image} 
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover p-2 rounded-2xl"
         />
         <div className="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-xs font-medium text-green-800">
           {product.category}

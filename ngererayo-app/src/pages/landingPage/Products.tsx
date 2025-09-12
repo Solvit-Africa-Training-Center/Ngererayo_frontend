@@ -53,6 +53,12 @@ const ProductsSection: React.FC = () => {
           </div>
         )}
       </div>
+      <div className="w-full text-center py-10">
+    <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-md text-sm font-medium">
+          View all product
+        </button>
+      </div>
+    
     </div>
   );
 };

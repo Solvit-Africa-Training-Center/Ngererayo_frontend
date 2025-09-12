@@ -8,13 +8,14 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm">
-      <div className="flex mb-4">
+    <div className="bg-white text-center p-6 rounded-xl shadow-sm">
+      <div className="text-center mb-4">
          <img 
-          src={testimonial.avatar || '/api/placeholder/40/40'} 
+          src={'/bg.jpg'} 
           alt={testimonial.name}
           className="w-10 h-10 rounded-full mr-3"
         />
+        <div className='flex'>
         {Array.from({ length: 5 }).map((_, i) => (
           <Star 
             key={i} 
@@ -22,6 +23,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
             className={i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"} 
           />
         ))}
+        </div>
+       
       </div>
       <p className="text-gray-600 mb-4 italic">"{testimonial.comment}"</p>
       <div className="flex items-center">
