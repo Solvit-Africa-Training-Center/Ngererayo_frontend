@@ -13,7 +13,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
   const itemTotal = item.price * item.quantity;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-400 p-6">
       <div className="flex items-center gap-4">
         <div className="flex-shrink-0">
           <img

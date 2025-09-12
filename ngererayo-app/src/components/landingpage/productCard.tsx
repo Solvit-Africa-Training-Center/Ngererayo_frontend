@@ -3,6 +3,8 @@ import { Star } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { Product } from '@/type/index';
 import { useNavigate } from "react-router-dom";
+import { MessageCircle } from 'lucide-react';
+
 
 interface ProductCardProps {
   product: Product;
@@ -31,8 +33,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     });
   };
   return (
-    <div onClick={handleClick}
+    <div 
+   
+
     className="bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-lg transition">
+        
+      <div onClick={handleClick} >
       <div className="h-48 bg-white relative">
         <img 
           src={product.image} 
@@ -58,13 +64,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ))}
           </div>
         </div>
-        <button 
+        </div>
+        
+      </div>
+        <div className='flex gap-4 p-5 justify-between items-center'>
+       <button 
           onClick={handleAddToCart}
-          className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition"
+          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
         >
           Add to Cart
         </button>
-      </div>
+
+        <button className='border border-gray-500 p-2 rounded-xl cursor-pointer'>
+          <MessageCircle className='text-gray-500' />
+        </button>
+        </div>
+     
     </div>
   );
 };

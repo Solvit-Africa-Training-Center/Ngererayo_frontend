@@ -14,7 +14,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items, onProceedToPayment }
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-4">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-400 p-6 sticky top-4">
       <h2 className="text-xl font-semibold mb-6 text-gray-900">Order Summary</h2>
       
       <div className="space-y-3 mb-6">
@@ -56,13 +56,13 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items, onProceedToPayment }
       
       <button
         onClick={onProceedToPayment}
-        className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors mb-4"
+        className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 cursor-pointer transition-colors mb-4"
       >
         Checkout
       </button>
       
       <p className="text-center text-gray-500 text-xs">
-        🔒 Secure checkout with SSL encryption
+        Secure checkout with SSL encryption
       </p>
     </div>
   );
