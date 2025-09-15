@@ -1,17 +1,3 @@
-@import "tailwindcss";
-
-:root{
-
-    /* quick action colors */
-    --green-bg-color:#52AC70;
-    --yellow-bg-color:#F4C21F;
-    --bold-green-bg:#2F7446;
-    /* farmer of month */
-    --division-bg-color:#FCDF6C;
-    --weather-division-border:#C6DEF3;
-    --weather-division-bg:#EDF4FB
-
-
-
-
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

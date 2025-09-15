@@ -4,7 +4,7 @@ import { WiDayCloudy, WiRaindrop, WiStrongWind } from 'react-icons/wi';
 
 const WeatherCard: React.FC = () => {
   return (
-    <div className="bg-[var(--weather-division-bg)] rounded-xl shadow-md p-4 mb-4 border border-[var(--weather-division-border)]">
+    <div className="bg-white rounded-xl shadow-md p-4 mb-4">
       <div className="flex justify-between items-center">
         <div>
           <p className="text-sm text-gray-500">Current Weather</p>
@@ -24,7 +24,7 @@ const WeatherCard: React.FC = () => {
       </div>
 
       <div className="mt-3 bg-blue-50 p-2 rounded text-xs text-blue-800">
-         <strong>Farming Tip:</strong> Ideal for planting vegetables today!
+        🌱 <strong>Farming Tip:</strong> Ideal for planting vegetables today!
       </div>
     </div>
   );

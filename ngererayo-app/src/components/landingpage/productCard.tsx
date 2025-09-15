@@ -1,25 +1,16 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { Product } from '@/type/index';
-import { useNavigate } from "react-router-dom";
-import { MessageCircle } from 'lucide-react';
-
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-
-
-    const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/product/${product.id}`);
-  };
-
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     addToCart({
@@ -32,18 +23,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       unit: 'piece'
     });
   };
-  return (
-    <div 
-   
 
-    className="bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-lg transition">
-        
-      <div onClick={handleClick} >
-      <div className="h-48 bg-white relative">
+  return (
+    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+      <div className="h-48 bg-green-100 relative">
         <img 
           src={product.image} 
           alt={product.name}
-          className="w-full h-full object-cover p-2 rounded-2xl"
+          className="w-full h-full object-cover"
         />
         <div className="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-xs font-medium text-green-800">
           {product.category}
@@ -64,22 +51,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ))}
           </div>
         </div>
+        <div className="flex gap-2 mt-4">
+          <button 
+            onClick={handleAddToCart}
+            className="flex-1 bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition"
+          >
+            Add to Cart
+          </button>
+          <button 
+            onClick={() => navigate(`/messages/product/${product.id}/seller/farmer1`)}
+            className='border border-gray-500 p-2 rounded-xl cursor-pointer hover:bg-gray-50 transition'
+          >
+            <MessageCircle className='text-gray-500' />
+          </button>
         </div>
-        
       </div>
-        <div className='flex gap-4 p-5 justify-between items-center'>
-       <button 
-          onClick={handleAddToCart}
-          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
-        >
-          Add to Cart
-        </button>
-
-        <button className='border border-gray-500 p-2 rounded-xl cursor-pointer'>
-          <MessageCircle className='text-gray-500' />
-        </button>
-        </div>
-     
     </div>
   );
 };

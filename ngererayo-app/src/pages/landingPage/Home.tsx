@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, Star } from 'lucide-react';
 import Header from '../../components/landingpage/Header';
+import ProductCard from '../../components/landingpage/productCard';
 import TestimonialCard from '../../components/landingpage/TestimonialCards';
 import Categories from '../landingPage/Categories'
 import StatCard from '../../components/landingpage/StatCard';
@@ -9,11 +10,11 @@ import StatCard from '../../components/landingpage/StatCard';
 import { 
   APP_NAME, 
   STATS_DATA, 
+  CATEGORIES, 
+  PRODUCTS, 
   TESTIMONIALS 
 } from '../../utilis/constraints';
 import Footer from '../../components/landingpage/Footer';
-import ProductsSection from './Products';
-import StatsSection from './StatsSection';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -30,9 +31,9 @@ const Home: React.FC = () => {
   }}
 >
   {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-yellow-800 opacity-80"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-900 opacity-80"></div>
 
-  <div className="container mx-auto px-4 py-20 relative z-10">
+  <div className="container mx-auto px-4 relative z-10">
     <div className="max-w-2xl">
       <h1 className="text-4xl md:text-5xl font-bold mb-4">
         Welcome to <br />
@@ -50,12 +51,12 @@ const Home: React.FC = () => {
       <div className="flex gap-4 mt-12">
       <button
             onClick={() => navigate('/register')}
-            className="bg-yellow-400 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100 hover:text-black  cursor-pointer transition"
+            className="bg-yellow-400 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100  cursor-pointer transition"
           >
-            Sign up Now →
+            Sign up Now
           </button>
         <button  onClick={() => navigate('/login')}
-         className="bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100 hover:text-black transition cursor-pointer">
+         className="bg-green-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-100 transition">
           Login
         </button>
       </div>
@@ -66,7 +67,16 @@ const Home: React.FC = () => {
 
       {/* Stats Section */}
       <section className="py-12 bg-white">
-        <StatsSection />
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {STATS_DATA.map((stat, index) => (
+              <div className='border-2 border-gray-300 rounded-3xl py-5'>
+             <StatCard key={index} stat={stat} />
+              </div>
+              
+            ))}
+          </div>
+        </div>
       </section>
 
          {/* Background Wrapper */}
@@ -85,7 +95,20 @@ const Home: React.FC = () => {
     
       {/* Featured Products */}
       <div id='marketplace' className="py-12 bg-white/70">
-       <ProductsSection />
+        <div className="container mx-auto px-4">
+          <div className=" text-center justify-between items-center mb-8">
+            <h2 className="text-3xl text-green-700 font-bold">Featured Products</h2>
+            <p>Choose from high-quality products from nearby trusted farmers</p>
+            <button className="text-green-700 font-medium flex items-center">
+              View all <ChevronRight size={16} className="ml-1" />
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PRODUCTS.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
     
       {/* Testimonials */}

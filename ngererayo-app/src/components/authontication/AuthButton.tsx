@@ -14,7 +14,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({
   onClick,
 }) => {
   const base =
-    "w-full py-2 rounded-md text-sm cursor-pointer font-medium transition-colors duration-200";
+    "w-full py-2 rounded-md text-sm font-medium transition-colors duration-200";
   const styles =
     variant === "primary"
       ? "bg-green-600 text-white hover:bg-green-700"

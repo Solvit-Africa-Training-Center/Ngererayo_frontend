@@ -3,10 +3,10 @@ import React from 'react';
 
 const FarmerOfTheMonth: React.FC = () => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 mb-4 text-center border border-[var(--division-bg-color)]">
-      <h3 className="text-lg font-bold mb-3">Farmer of the Month</h3>
+    <div className="bg-white rounded-xl shadow-md p-4 mb-4 text-center">
+      <h3 className="text-lg font-semibold mb-3">👩‍🌾 Farmer of the Month</h3>
       <img
-        src="/hero.jpg"
+        src="https://via.placeholder.com/80"
         alt="Farmer"
         className="w-20 h-20 mx-auto rounded-full mb-2"
       />

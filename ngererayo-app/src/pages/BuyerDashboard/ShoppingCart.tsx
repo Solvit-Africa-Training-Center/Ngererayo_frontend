@@ -1,4 +1,14 @@
-
+/**
+ * SHOPPING CART PAGE - Cart management with order summary
+ * 
+ * Integration Notes:
+ * - Requires CartContext provider in App.tsx
+ * - Calculates subtotal, shipping (free >$50), tax (8%)
+ * - Empty state shows highlighted calculation placeholders
+ * - Routes to /payment on checkout
+ * 
+ * Dependencies: CartContext, CartItem type
+ */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
@@ -22,15 +32,9 @@ const ShoppingCart: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <button
-        onClick={() => navigate(-1)}
-        className="text-green-600 mb-4 cursor-pointer flex items-center hover:underline"
-      >
-        ← Back to Marketplace
-      </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
           <p className="text-gray-600">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart</p>
         </div>
         
@@ -38,7 +42,7 @@ const ShoppingCart: React.FC = () => {
           {/* Cart Items Section */}
           <div className="lg:col-span-8">
             {cartItems.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-sm border border-gray-400 p-8">
+              <div className="bg-white rounded-lg shadow-sm border p-8">
                 <div className="text-center">
                   <ShoppingCartIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
@@ -68,7 +72,7 @@ const ShoppingCart: React.FC = () => {
           {/* Order Summary Section */}
           <div className="lg:col-span-4">
             {cartItems.length === 0 ? (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-400 p-6">
+              <div className="bg-white rounded-lg shadow-sm border p-6">
                 <h2 className="text-xl font-semibold mb-6 text-gray-900">Order Summary</h2>
                 
                 <div className="space-y-4 mb-6">
@@ -95,7 +99,7 @@ const ShoppingCart: React.FC = () => {
                 
                 <button
                   disabled
-                  className="w-full bg-gray-300 text-gray-500 py-3 cursor-pointer rounded-lg font-medium mb-4"
+                  className="w-full bg-gray-300 text-gray-500 py-3 rounded-lg font-medium cursor-not-allowed mb-4"
                 >
                   Checkout
                 </button>
