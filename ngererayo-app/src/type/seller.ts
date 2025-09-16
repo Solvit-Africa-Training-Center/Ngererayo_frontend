@@ -49,3 +49,25 @@ export interface RecentOrder {
   status: 'pending' | 'confirmed' | 'shipped' | 'delivered';
   orderDate: Date;
 }
+
+export interface Chat {
+  id: string;
+  buyerId: string;
+  buyerName: string;
+  productId: string;
+  productName: string;
+  lastMessage: string;
+  lastMessageTime: Date;
+  unreadCount: number;
+  status: 'active' | 'closed';
+}
+
+export interface Message {
+  id: string;
+  chatId: string;
+  senderId: string;
+  senderType: 'buyer' | 'seller';
+  content: string;
+  timestamp: Date;
+  isRead: boolean;
+}

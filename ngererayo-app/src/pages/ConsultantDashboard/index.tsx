@@ -1,0 +1,2 @@
+export { default as ConsultantDashboard } from '../../components/consultant/ConsultantDashboard';
+export { default as ConsultantRegistrationPage } from '../../components/consultant/ConsultantRegistrationPage';
