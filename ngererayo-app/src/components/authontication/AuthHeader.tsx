@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Marketplace', path: '#marketplace', icon: <Store size={16} /> },
+    { name: 'Marketplace', path: '/', icon: <Store size={16} /> },
     { name: 'Contact', path: '/contact', icon: <Phone size={16} /> },
   ];
 

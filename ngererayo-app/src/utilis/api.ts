@@ -12,3 +12,5 @@ export const api = axios.create({
 // Auth endpoints
 export const REGISTER_URL = "/accounts/register/";
 export const LOGIN_URL = "/accounts/login/";
+export const LOGGED_IN_USER ="/accounts/current-user/"
+

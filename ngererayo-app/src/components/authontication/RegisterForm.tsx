@@ -43,7 +43,8 @@ const RegisterForm: React.FC = () => {
       });
 
       toast.success("Account created successfully!");
-      setTimeout(() => navigate("/login"), 1500); // wait before redirect
+      // redirect to verify-otp page with email pre-filled
+      setTimeout(() => navigate("/verify-otp", { state: { email } }), 3000);
     } catch (err: any) {
       console.error(err.response?.data);
       const errorMessage =

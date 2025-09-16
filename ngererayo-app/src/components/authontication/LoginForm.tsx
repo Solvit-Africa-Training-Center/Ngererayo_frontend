@@ -5,7 +5,7 @@ import Header from "./AuthHeader";
 import Footer from "../landingpage/Footer";
 import AuthInput from "./AuthInput";
 import AuthButton from "./AuthButton";
-import { api, LOGIN_URL } from "../../utilis/api";
+import { api,} from "../../utilis/api";
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +19,7 @@ const LoginForm: React.FC = () => {
     try {
       const res = await api.post('/accounts/login/', { email, password });
       // Save token in localStorage for later requests
-      localStorage.setItem("token", res.data.token);
+      sessionStorage.setItem("token", res.data.access);
       navigate("/buyerhome");
     } catch (err: any) {
       setError(err.response?.data?.detail || "Invalid email or password");

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Star, MapPin, CheckCircle, MessageSquare } from "lucide-react";
 import Header from "../authontication/AuthHeader";
 import Footer from "./Footer";
+import { api } from "../../utilis/api";
 
 interface Product {
   id: number;
@@ -28,8 +29,8 @@ const ProductDetailPage: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `https://degreat1.pythonanywhere.com/market/product/${productId}/`,
+        const response = await api.get(
+          `/market/product/${productId}/`,
           {
             headers: {
               "accept": "application/json",
@@ -68,7 +69,7 @@ const ProductDetailPage: React.FC = () => {
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div>
           <img
-            src={`https://degreat1.pythonanywhere.com${product.product_image}`}
+            src={`https://ngererayo-backend.onrender.com${product.product_image}`}
             alt={product.product_name}
             className="w-full h-[400px] object-cover rounded-xl"
           />

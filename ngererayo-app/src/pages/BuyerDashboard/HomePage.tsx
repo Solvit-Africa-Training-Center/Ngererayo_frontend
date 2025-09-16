@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { ShoppingBag, DollarSign, MessageSquare, Search, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { api } from '../../utilis/api';
 import Footer from "../../components/landingpage/Footer";
-import Header from "../../components/landingpage/Header";
+import Header from "../../pages/BuyerDashboard/DashboardHeader";
 
 export default function HomeDashboard() {
   const navigate = useNavigate();
+  const [username, setUsername] = useState<string | null>(null);
+   // Fetch user profile if token exists
+    useEffect(() => {
+      const token = sessionStorage.getItem('token');
+      if (token) {
+        api
+          .get('/accounts/current-user/', {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setUsername(res.data.username || res.data.email); // adjust field name
+          })
+          .catch(() => {
+            setUsername(null);
+          });
+      }
+    }, []);
   
   return (
 
      <div>
 
      <Header />
-    <div className="p-8 space-y-8">
+    <div className="p-10 space-y-8 py-25">
       {/* Welcome Section */}
       <div>
-        <h1 className="text-2xl font-bold">Welcome back Jean</h1>
+        <h1 className="text-2xl font-bold">Welcome back: {username}</h1>
         <p className="text-gray-500">Account verified</p>
       </div>
 
