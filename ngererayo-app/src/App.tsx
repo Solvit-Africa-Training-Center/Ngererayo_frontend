@@ -7,60 +7,38 @@ import LoginForm from './components/authontication/LoginForm';
 import ContactPage from './pages/landingPage/ContactPage';
 import BuyerHomeDashboard from './pages/BuyerDashboard/HomePage';
 import ProductDetailPage from "./components/landingpage/ProductDetail";
-<<<<<<< Updated upstream
-import MessagingPage from './components/messaging/MessagingPage';
-import OTPVerificationPage from './components/authontication/OTPVerificationPage';
-import ShoppingCart from './pages/BuyerDashboard/ShoppingCart';
-import PaymentPage from './pages/BuyerDashboard/PaymentPage';
-import OrderSuccess from './pages/BuyerDashboard/OrderSuccess';
-=======
 import ProtectedRoute from "./components/authontication/ProtectedRoute";
-
 import ShoppingCart from './pages/BuyerDashboard/ShoppingCart'
 import PaymentPage from './pages/BuyerDashboard/PaymentPage'
 import OrderSuccess from './pages/BuyerDashboard/OrderSuccess'
 import VerifyAccount from './components/authontication/VerifyAccount';
 import AllProductsPage from './pages/AllProductsPage';
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
 
 const App: React.FC = () => {
   return (
     <CartProvider>
       <Router>
       <Routes>
-        {/* landing page */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/verify-otp" element={<VerifyAccount />} />
         <Route path="/contact" element={<ContactPage />} />
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
         <Route path="/products" element={<AllProductsPage />} />
         <Route path="/product/:productId" element={<ProductDetailPage />} />
->>>>>>> Stashed changes
 
+        <Route
+          path="/buyerhome"
+          element={
+            <ProtectedRoute>
+              <BuyerHomeDashboard />
+            </ProtectedRoute>
+          }
+        />
 
-
-        <Route path="/buyerhome" element={<BuyerHomeDashboard />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/order-success" element={<OrderSuccess />} />
-        
-        {/* Messaging Routes */}
-        <Route path="/messages" element={<MessagingPage />} />
-        <Route path="/messages/:chatId" element={<MessagingPage />} />
-        <Route path="/messages/product/:productId/seller/:sellerId" element={<MessagingPage />} />
-        
-        {/* Verification Route */}
-        <Route path="/verify-account" element={<OTPVerificationPage />} />
-
       </Routes>
       </Router>
     </CartProvider>
