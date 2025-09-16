@@ -21,6 +21,9 @@ import PaymentPage from './pages/BuyerDashboard/PaymentPage'
 import OrderSuccess from './pages/BuyerDashboard/OrderSuccess'
 import VerifyAccount from './components/authontication/VerifyAccount';
 import AllProductsPage from './pages/AllProductsPage';
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 
@@ -35,7 +38,10 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/contact" element={<ContactPage />} />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
         <Route path="/products" element={<AllProductsPage />} />
         <Route path="/product/:productId" element={<ProductDetailPage />} />
 >>>>>>> Stashed changes
