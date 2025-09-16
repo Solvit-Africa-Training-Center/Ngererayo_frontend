@@ -1,3 +1,11 @@
+<<<<<<< Updated upstream
+=======
+// src/components/landingpage/ProductsSection.tsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import ProductCard from "../../components/landingpage/productCard";
+>>>>>>> Stashed changes
 
 import { Filter, Grid, List } from 'lucide-react';
 import ProductCard from '@/components/landingpage/productCard';
@@ -63,8 +71,19 @@ const Products: React.FC = () => {
           </div>
         )}
       </div>
+<<<<<<< Updated upstream
       
    
+=======
+      <div className="w-full text-center py-10">
+        <Link to="/products">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-md text-sm font-medium">
+            View all products
+          </button>
+        </Link>
+      </div>
+    
+>>>>>>> Stashed changes
     </div>
   );
 };

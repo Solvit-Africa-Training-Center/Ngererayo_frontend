@@ -7,11 +7,21 @@ import LoginForm from './components/authontication/LoginForm';
 import ContactPage from './pages/landingPage/ContactPage';
 import BuyerHomeDashboard from './pages/BuyerDashboard/HomePage';
 import ProductDetailPage from "./components/landingpage/ProductDetail";
+<<<<<<< Updated upstream
 import MessagingPage from './components/messaging/MessagingPage';
 import OTPVerificationPage from './components/authontication/OTPVerificationPage';
 import ShoppingCart from './pages/BuyerDashboard/ShoppingCart';
 import PaymentPage from './pages/BuyerDashboard/PaymentPage';
 import OrderSuccess from './pages/BuyerDashboard/OrderSuccess';
+=======
+import ProtectedRoute from "./components/authontication/ProtectedRoute";
+
+import ShoppingCart from './pages/BuyerDashboard/ShoppingCart'
+import PaymentPage from './pages/BuyerDashboard/PaymentPage'
+import OrderSuccess from './pages/BuyerDashboard/OrderSuccess'
+import VerifyAccount from './components/authontication/VerifyAccount';
+import AllProductsPage from './pages/AllProductsPage';
+>>>>>>> Stashed changes
 
 
 const App: React.FC = () => {
@@ -24,6 +34,11 @@ const App: React.FC = () => {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/contact" element={<ContactPage />} />
+<<<<<<< Updated upstream
+=======
+        <Route path="/products" element={<AllProductsPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
+>>>>>>> Stashed changes
 
 
 

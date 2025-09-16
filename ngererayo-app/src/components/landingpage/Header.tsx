@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const cartCount = getCartItemCount();
 
   const navLinks = [
-    { name: 'Marketplace', path: '#marketplace', icon: <Store size={16} /> },
+    { name: 'Marketplace', path: '/products', icon: <Store size={16} /> },
     { name: 'Categories', path: '#categories', icon: <LayoutGrid size={16} /> },
     { name: 'Community', path: '#community', icon: <Users size={16} /> },
     { name: 'Support', path: '/support', icon: <LifeBuoy size={16} /> },
