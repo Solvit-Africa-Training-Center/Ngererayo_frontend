@@ -21,6 +21,8 @@ const RegisterForm: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+    const [loading, setLoading] = useState(false); // <-- loading state
+
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ const RegisterForm: React.FC = () => {
       toast.error("Passwords do not match");
       return;
     }
-
+setLoading(true); // show loader
     try {
       await api.post(REGISTER_URL, {
         username,
@@ -52,6 +54,8 @@ const RegisterForm: React.FC = () => {
         err.response?.data?.confirm_password?.[0] ||
         "Registration failed";
       toast.error(errorMessage);
+     } finally {
+      setLoading(false); // hide loader
     }
   };
 
@@ -150,6 +154,11 @@ const RegisterForm: React.FC = () => {
           </p>
         </form>
         </div>
+         {loading && (
+          <div className="overlay-fallback">
+            <div className="w-20 h-20 border-4 border-t-green-500 border-r-transparent border-b-green-500 border-l-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
       </div>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />

@@ -16,13 +16,13 @@ const StatsSection: React.FC = () => {
   useEffect(() => {
     // Fetch farmers
     axios
-      .get("https://degreat1.pythonanywhere.com/market/owners/")
+      .get("https://ngererayo-backend.onrender.com/market/owners/")
       .then((res) => setActiveFarmers(res.data.owners_count))
       .catch((err) => console.error("Error fetching farmers:", err));
 
     // Fetch products
     axios
-      .get("https://degreat1.pythonanywhere.com/market/all-products/")
+      .get("https://ngererayo-backend.onrender.com/market/all-products/")
       .then((res) => setProductsListed(res.data.length))
       .catch((err) => console.error("Error fetching products:", err));
   }, []);

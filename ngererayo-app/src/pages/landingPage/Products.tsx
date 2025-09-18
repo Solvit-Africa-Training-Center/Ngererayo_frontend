@@ -41,11 +41,11 @@ const ProductsSection: React.FC = () => {
                 product={{
                   id: product.id,
                   name: product.product_name,
-                  category: product.owner?.farming_name || "Unknown",
+                  // category: product.owner?.farming_name || "Unknown",
                   price: `RWF ${product.price}`,
                   rating: 4, // Default rating since API doesn't send one
                   image: `https://ngererayo-backend.onrender.com${product.product_image}`,
-                  farmer: product.owner?.farming_name || "Unknown Farmer",
+                  // farmer: product.owner?.farming_name || "Unknown Farmer",
                   description: product.description,
                 }}
               />

@@ -103,9 +103,12 @@ const Header: React.FC = () => {
           <button className="text-black hover:text-green-600">
             <Bell size={20} />
           </button>
-          <button className="text-black hover:text-green-600">
+          <Link to="/login">
+           <button className="text-black hover:text-green-600 cursor-pointer">
             <User size={20} />
           </button>
+          </Link>
+         
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -149,7 +152,9 @@ const Header: React.FC = () => {
               <ShoppingCart size={20} />
             </Link>
             <Bell size={20} />
-            <User size={20} />
+            <Link to="/login">
+            <User size={20} /> 
+            </Link> 
           </div>
         </div>
       )}

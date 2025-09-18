@@ -1,16 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../../../type/cart';
 
 interface OrderSummaryProps {
   items: CartItem[];
-  onProceedToPayment: () => void;
 }
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ items, onProceedToPayment }) => {
+const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
+  const navigate = useNavigate();
+
   // Calculate order totals
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = subtotal > 50 ? 0 : 5.99; // Free shipping over $50
-  const tax = subtotal * 0.08; // 8% tax rate
+  const shipping = subtotal > 50 ? 0 : 5.99; // 
+  const tax = subtotal * 0.02; // 8% tax rate
   const total = subtotal + shipping + tax;
 
   return (
@@ -55,10 +57,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items, onProceedToPayment }
       </div>
       
       <button
-        onClick={onProceedToPayment}
+        onClick={() => navigate('/make_order')}
         className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 cursor-pointer transition-colors mb-4"
       >
-        Checkout
+        Proceed Order
       </button>
       
       <p className="text-center text-gray-500 text-xs">

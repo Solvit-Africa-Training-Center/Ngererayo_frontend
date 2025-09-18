@@ -8,10 +8,11 @@ import {
   Menu,
   X,
   Phone,
+  LifeBuoy,
+  Users,
   LayoutGrid,
   Store,
   LogOut,
-  Users,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
@@ -22,20 +23,18 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
-  const [role, setRole] = useState<string | null>(null);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [role, setRole] = useState<string | null>(null); // ✅ store role
 
   const { getCartItemCount } = useCart();
   const cartCount = getCartItemCount();
   const navigate = useNavigate();
 
   const navLinks = [
-    { name: 'Marketplace', path: '/buyer-marketplace', icon: <Store size={16} /> },
-    { name: 'Categories', path: '#categories', icon: <LayoutGrid size={16} /> },
-    { name: 'Community', path: '#community', icon: <Users size={16} /> },
-    { name: 'Contact', path: '#contact', icon: <Phone size={16} /> },
+    { name: 'Marketplace', path: '/seller-marketplace', icon: <Store size={16} /> },
+    { name: 'Contact', path: '/contact', icon: <Phone size={16} /> },
   ];
 
+  // Fetch user profile if token exists
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     if (token) {
@@ -45,7 +44,7 @@ const Header: React.FC = () => {
         })
         .then((res) => {
           setUsername(res.data.username || res.data.email);
-          setRole(res.data.role);
+          setRole(res.data.role); // ✅ save role
         })
         .catch(() => {
           setUsername(null);
@@ -55,9 +54,13 @@ const Header: React.FC = () => {
   }, []);
 
   const navigateToDashboard = () => {
-    if (role === "farmer") navigate("/seller-dashboard");
-    else if (role === "buyer") navigate("/buyerhome");
-    else navigate("/");
+    if (role === "farmer") {
+      navigate("/seller-dashboard");
+    } else if (role === "buyer") {
+      navigate("/buyerhome");
+    } else {
+      navigate("/");
+    }
   };
 
   const handleLogout = () => {
@@ -69,7 +72,9 @@ const Header: React.FC = () => {
 
   const handleScroll = (hash: string) => {
     const element = document.querySelector(hash);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -79,10 +84,12 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-3">
           <img src={logo} alt="Logo" className="h-8 w-auto" />
           <div className="leading-tight">
-            <Link to="/buyerhome" className="text-green-700 font-bold text-lg">
+            <Link to="#" className="text-green-700 font-bold text-lg">
               NGERERAYO
             </Link>
-            <p className="text-xs text-gray-500 -mt-1">Agricultural Marketplace</p>
+            <p className="text-xs text-gray-500 -mt-1">
+              Agricultural Marketplace
+            </p>
           </div>
         </div>
 
@@ -113,21 +120,21 @@ const Header: React.FC = () => {
 
         {/* Right Icons */}
         <div className="hidden lg:flex items-center space-x-4 relative">
-         
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search Products..."
+              className="bg-gray-100 text-sm px-4 py-2 rounded-full w-64 focus:outline-none focus:ring-2 focus:ring-green-300"
+            />
+            <Search className="absolute right-3 top-2.5 text-gray-500" size={16} />
+          </div>
 
           <button className="text-sm text-black flex items-center space-x-1 hover:text-green-600">
             <Globe size={16} />
             <span>EN</span>
           </button>
 
-          <Link to="/cart" className="text-black hover:text-green-600 relative">
-            <ShoppingCart size={20} />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+        
 
           <button className="text-black hover:text-green-600">
             <Bell size={20} />
@@ -143,50 +150,32 @@ const Header: React.FC = () => {
                 <User size={20} />
                 <span className="text-sm">{username}</span>
               </button>
-             {isDropdownOpen && (
-  <div className="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg py-2 z-50">
-    <p className="px-4 py-2 text-sm text-gray-700">{username}</p>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg py-2 z-50">
+                  <p className="px-4 py-2 text-sm text-gray-700">{username}</p>
 
-    {/* Seller Dashboard button for farmers */}
-    {role === "farmer" && (
-      <button
-        onClick={() => {
-          navigateToDashboard();
-          setIsDropdownOpen(false);
-        }}
-        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        Seller Dashboard
-      </button>
-    )}
+                  {/* ✅ Only show if farmer */}
+                  {role === "farmer" && (
+                    <button
+                      onClick={() => {
+                        navigateToDashboard();
+                        setIsDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Seller Dashboard
+                    </button>
+                  )}
 
-    {/* Become a Seller button for buyers */}
-    {role === "buyer" && (
-      <button
-        onClick={() => {
-          navigate("/become-seller");
-          setIsDropdownOpen(false);
-        }}
-        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        Become a Seller
-      </button>
-    )}
-
-    {/* Logout button */}
-    <button
-      onClick={() => {
-        setShowLogoutModal(true);
-        setIsDropdownOpen(false);
-      }}
-      className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-    >
-      <LogOut size={16} className="mr-2" />
-      Logout
-    </button>
-  </div>
-)}
-
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                  >
+                    <LogOut size={16} className="mr-2" />
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <Link to="/login" className="text-black hover:text-green-600">
@@ -239,8 +228,9 @@ const Header: React.FC = () => {
               <ShoppingCart size={20} />
             </Link>
             <Bell size={20} />
-            {username && (
+            {username ? (
               <>
+                {/* ✅ Show seller dashboard only if farmer */}
                 {role === "farmer" && (
                   <button
                     onClick={() => {
@@ -252,42 +242,20 @@ const Header: React.FC = () => {
                     <span>Seller Dashboard</span>
                   </button>
                 )}
+
                 <button
-                  onClick={() => {
-                    setShowLogoutModal(true);
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={handleLogout}
                   className="text-red-600 flex items-center space-x-1 w-full"
                 >
                   <LogOut size={18} />
                   <span>Logout</span>
                 </button>
               </>
+            ) : (
+              <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <User size={20} />
+              </Link>
             )}
-          </div>
-        </div>
-      )}
-
-      {/* ✅ Logout Modal */}
-      {showLogoutModal && (
-        <div className="overlay-fallback">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-80">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Confirm Logout</h2>
-            <p className="text-gray-600 mb-6">Are you sure you want to logout?</p>
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-              >
-                Logout
-              </button>
-            </div>
           </div>
         </div>
       )}

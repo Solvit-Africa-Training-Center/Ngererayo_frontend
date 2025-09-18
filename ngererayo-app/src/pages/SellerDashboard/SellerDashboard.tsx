@@ -1,21 +1,13 @@
-/**
- * SELLER DASHBOARD - Main hub for verified sellers
- * 
- * Integration Notes:
- * - Requires CartContext for cart functionality
- * - Uses seller verification status to control access
- * - Sample data included - replace with API calls
- * - Routes: /seller-dashboard, /seller-verification
- * 
- * Dependencies: SellerProfile, DashboardMetrics, Product types
- */
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Clock, AlertCircle } from 'lucide-react';
-import { SellerProfile, DashboardMetrics as MetricsType, Product } from '../../type/seller';
-import VerificationStatus from '../../components/seller/VerificationStatus';
-import DashboardMetrics from '../../components/seller/DashboardMetrics';
-import ProductListings from '../../components/seller/ProductListings';
+import { SellerProfile, DashboardMetrics as MetricsType, Product } from '../../pages/SellerDashboard/index';
+import VerificationStatus from '../../components/sellerDashboard/VerificationStatus';
+import DashboardMetrics from '../../components/sellerDashboard/DashboardMetrics';
+import ProductListings from '../../components/sellerDashboard/ProductListings';
+import Header from '../SellerDashboard/sellerHeader';
+import Footer from '../../components/landingpage/Footer';
 
 // Sample data for testing
 const sampleSellerProfile: SellerProfile = {
@@ -101,13 +93,7 @@ const SellerDashboard = () => {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      // TODO: Replace with actual API calls
-      // const [sellerData, metricsData, productsData] = await Promise.all([
-      //   fetchSellerProfile(),
-      //   fetchDashboardMetrics(), 
-      //   fetchSellerProducts()
-      // ]);
-      
+     
       // Using sample data for now
       await new Promise(resolve => setTimeout(resolve, 1000));
       setSeller(sampleSellerProfile);
@@ -144,7 +130,9 @@ const SellerDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+  <div>
+   <Header />
+    <div className="min-h-screen bg-gray-50 py-20">
       <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Header Section */}
         <div className="flex justify-between items-start mb-6">
@@ -218,6 +206,8 @@ const SellerDashboard = () => {
           <ProductListings products={products} />
         )}
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };

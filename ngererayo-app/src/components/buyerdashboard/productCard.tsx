@@ -1,8 +1,8 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
-import { Product } from '@/type/index';
-import { useNavigate ,Link} from "react-router-dom";
+import { Product } from '../../types/index';
+import { useNavigate } from "react-router-dom";
 import { MessageCircle } from 'lucide-react';
 
 
@@ -19,6 +19,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     navigate(`/product/${product.id}`);
   };
 
+  const { addToCart } = useCart();
+
+const handleAddToCart = () => {
+  addToCart({
+    id: product.id,
+    name: product.name,
+    price: parseFloat(product.price.replace('RWF ', '').replace(',', '')),
+    image: product.image,
+    sellerId: 'farmer1',
+    sellerName: product.farmer,
+    unit: 'piece'
+  });
+};
 
     // open chat for this product
   const openChat = (e: React.MouseEvent) => {
@@ -44,10 +57,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
       <div className="p-4">
         <h3 className="font-bold text-gray-800 mb-1">{product.name}</h3>
-        
-
+        {/* <p className="text-sm text-gray-600 mb-2">By {product.farmer}</p> */}
         <div className="flex items-center justify-between">
-          <span className="text-green-700 font-bold">{product.price} Kg</span>
+          <span className="text-green-700 font-bold">{product.price}</span>
           <div className="flex items-center">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star 
@@ -62,14 +74,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         
       </div>
         <div className='flex gap-4 p-5 justify-between items-center'>
-        <Link to="/login" className='w-full bg-green-600 text-white py-2 rounded-lg font-medium transition cursor-pointer'>
-         <button 
-          className="w-full bg-green-600 text-white rounded-lg font-medium transition cursor-pointer"
+       <button 
+          onClick={handleAddToCart}
+          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
         >
           Add to Cart
         </button>
-        </Link>
-      
 
         <button
           onClick={openChat}

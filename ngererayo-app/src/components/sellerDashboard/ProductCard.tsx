@@ -1,4 +1,4 @@
-import { Product } from '../../type/seller';
+import { Product } from '../../pages/SellerDashboard/index';
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +12,7 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
         <p className="text-sm text-gray-600">
           {product.price}/{product.unit} - {product.stock} in stock
         </p>
-        <h3 className="font-medium text-gray-900">{product.name}</h3>
+        <h3 className="font-medium text-gray-900">{product.onwer?.name}</h3>
       </div>
       <button
         onClick={onEdit}

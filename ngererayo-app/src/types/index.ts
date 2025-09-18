@@ -9,8 +9,9 @@ export interface Product {
   reviews: number;
   location: string;
   description: string;
-  seller: {
-    name: string;
+  owner_name: string; 
+  owner: {
+    first_name: string;
     rating: number;
     reviews: number;
   };
