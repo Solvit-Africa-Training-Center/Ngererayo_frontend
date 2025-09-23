@@ -1,13 +1,14 @@
 // components/sellerDashboard/AddNewProduct.tsx
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface AddNewProductProps {
   onClose: () => void;
-  onProductAdded?: () => void;
+  onProductAdded?: (newProduct: any) => void; // pass the new product back
 }
+
 
 const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }) => {
   const [productName, setProductName] = useState("");
@@ -51,7 +52,7 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }
 
     try {
       setLoading(true);
-      await axios.post(
+      const res = await axios.post(
         "https://ngererayo-backend.onrender.com/market/owner/add-product/",
         formData,
         {
@@ -62,7 +63,7 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }
         }
       );
 
-      toast.success("✅ Product added successfully!");
+      toast.success(" Product added successfully!");
       setProductName("");
       setDescription("");
       setPrice("");
@@ -70,10 +71,12 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }
       setProductImage(null);
       setImagePreview(null);
 
-      if (onProductAdded) onProductAdded();
+       // 👇 Send the new product to parent
+  if (onProductAdded) onProductAdded(res.data);
+
       onClose();
     } catch (err: any) {
-      toast.error(err.response?.data?.detail || "❌ Failed to add product");
+      toast.error(err.response?.data?.detail || " Failed to add product");
     } finally {
       setLoading(false);
     }
@@ -155,7 +158,7 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Price(RWF)</label>
               <div className="relative">
-                <span className="absolute left-3 top-3 text-gray-500">$</span>
+                
                 <input
                   type="number"
                   placeholder="0.00"
@@ -210,8 +213,6 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ onClose, onProductAdded }
             </button>
           </div>
         </form>
-
-        <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </div>
   );

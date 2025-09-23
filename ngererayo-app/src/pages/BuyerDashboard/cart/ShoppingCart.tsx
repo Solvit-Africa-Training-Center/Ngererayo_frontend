@@ -2,27 +2,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
-import { useCart } from '../../context/CartContext';
-import Header from '../../components/landingpage/Header';
-import Footer from '../../components/landingpage/Footer';
-import CartItem from './cart/CartItem';
-import OrderSummary from './cart/OrderSummary';
+import { useCart } from '../../../context/CartContext';
+import CartItem from './CartItem';
+import OrderSummary from './OrderSummary';
 
 const ShoppingCart: React.FC = () => {
   const navigate = useNavigate();
   // Access cart state and functions from CartContext
   const { cartItems, updateQuantity, removeFromCart } = useCart();
 
-  // Navigate to payment page when checkout is clicked
-  const handleProceedToPayment = () => {
-    navigate('/payment');
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <button
         onClick={() => navigate(-1)}
         className="text-green-600 mb-4 cursor-pointer flex items-center hover:underline"
@@ -44,7 +37,7 @@ const ShoppingCart: React.FC = () => {
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Your cart is empty</h3>
                   <p className="text-gray-500 mb-6">Add some products to get started</p>
                   <button
-                    onClick={() => navigate('/buyer-marketplace')}
+                    onClick={() => navigate('/buyer/marketplace')}
                     className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     Continue Shopping
@@ -107,14 +100,14 @@ const ShoppingCart: React.FC = () => {
             ) : (
               <OrderSummary
                 items={cartItems}
-                onProceedToPayment={handleProceedToPayment}
+                
               />
             )}
           </div>
         </div>
       </div>
       
-      <Footer />
+    
     </div>
   );
 };

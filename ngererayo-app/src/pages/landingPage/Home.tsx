@@ -1,14 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, Star } from 'lucide-react';
 import Header from '../../components/landingpage/Header';
 import TestimonialCard from '../../components/landingpage/TestimonialCards';
+import ConsultantList from "../../components/landingpage/ConsultantList";
 import Categories from '../landingPage/Categories'
-import StatCard from '../../components/landingpage/StatCard';
+
 
 import { 
   APP_NAME, 
-  STATS_DATA, 
   TESTIMONIALS 
 } from '../../utilis/constraints';
 import Footer from '../../components/landingpage/Footer';
@@ -87,11 +86,17 @@ const Home: React.FC = () => {
       <div id='marketplace' className="py-12 bg-white/70">
        <ProductsSection />
       </div>
-    
+    {/* Consultants Section */}
+    <section id='consultant' className="py-12 bg-white/70">
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl font-bold  text-gray-800 text-center mb-8">Meet Our Consultants</h2>
+        <ConsultantList />
+      </div>
+    </section>
       {/* Testimonials */}
       <div id='community' className="py-12 bg-white/70">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">What Our Community Says</h2>
+          <h2 className="text-2xl font-bold text-gray-800 text-center mb-8">What Our Community Says</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map(testimonial => (
               <TestimonialCard key={testimonial.id} testimonial={testimonial} />

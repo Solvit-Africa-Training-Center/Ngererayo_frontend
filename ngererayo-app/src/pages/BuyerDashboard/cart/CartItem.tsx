@@ -1,6 +1,6 @@
 import React from 'react';
 import { Plus, Minus, Trash2 } from 'lucide-react';
-import { CartItem as CartItemType } from '../../../type/cart';
+import { CartItem as CartItemType } from '../../../types/cart';
 
 interface CartItemProps {
   item: CartItemType;

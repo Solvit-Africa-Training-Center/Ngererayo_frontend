@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
     try {
       const res = await api.post('/accounts/login/', { email, password });
       sessionStorage.setItem("token", res.data.access);
-      navigate("/buyerhome");
+      navigate("/buyer");
     } catch (err: any) {
       setError(err.response?.data?.detail || "Invalid email or password");
     } finally {

@@ -19,10 +19,7 @@ import logo from '../../assets/images/LOGO.png';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navLinks = [
-    { name: 'Marketplace', path: '/', icon: <Store size={16} /> },
-    { name: 'Contact', path: '/contact', icon: <Phone size={16} /> },
-  ];
+
 
   const handleScroll = (hash: string) => {
     const element = document.querySelector(hash);
@@ -46,29 +43,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex space-x-6 items-center">
-          {navLinks.map((item) => (
-            item.path.startsWith('#') ? (
-              <button
-                key={item.name}
-                onClick={() => handleScroll(item.path)}
-                className="flex items-center cursor-pointer space-x-1 text-sm text-black hover:text-green-600"
-              >
-                {item.icon}
-                <span>{item.name}</span>
-              </button>
-            ) : (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="flex items-center cursor-pointer space-x-1 text-sm text-black hover:text-green-600"
-              >
-                {item.icon}
-                <span>{item.name}</span>
-              </Link>
-            )
-          ))}
-        </nav>
+        
 
         {/* Right Icons */}
         <div className="hidden lg:flex items-center space-x-4">
@@ -98,31 +73,7 @@ const Header: React.FC = () => {
       {/* Mobile Nav */}
       {isMenuOpen && (
         <div className="lg:hidden bg-white shadow-md px-4 py-3 space-y-4">
-          <div className="space-y-3">
-            {navLinks.map((item) => (
-              item.path.startsWith('#') ? (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    handleScroll(item.path);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left text-black hover:text-green-600"
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-black hover:text-green-600"
-                >
-                  {item.name}
-                </Link>
-              )
-            ))}
-          </div>
+          
 
           <div className="flex space-x-4 mt-4">
             <Search size={20} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartItem } from '../../../type/cart';
+import { CartItem } from '../../../types/cart';
 
 interface OrderSummaryProps {
   items: CartItem[];
@@ -31,7 +31,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
       <div className="space-y-3 mb-6 text-sm">
         <div className="flex justify-between">
           <span className="text-gray-600">Subtotal</span>
-          <span className="font-medium">${subtotal.toFixed(2)}</span>
+          <span className="font-medium">RWF{subtotal.toFixed(2)}</span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Shipping</span>
@@ -57,7 +57,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
       </div>
       
       <button
-        onClick={() => navigate('/make_order')}
+        onClick={() => navigate('/buyer/make-order')}
         className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 cursor-pointer transition-colors mb-4"
       >
         Proceed Order

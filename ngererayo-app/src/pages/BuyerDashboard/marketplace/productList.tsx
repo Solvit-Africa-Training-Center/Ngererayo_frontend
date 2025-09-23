@@ -1,16 +1,35 @@
-// src/components/landingpage/ProductsSection.tsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ProductCard from "../../../components/buyerdashboard/productCard";
-import Header from "../DashboardHeader";
-import Footer from "../../../components/landingpage/Footer";
+import { api } from "../../../utilis/api"; // ✅ use your api util
+import ProductCard from "../../../components/buyerdashboard/productList/productCard";
 
 const ProductsSection: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [ownerId, setOwnerId] = useState<number | null>(null);
 
+  // ✅ Fetch logged-in user's ownerId
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) return;
+
+    api
+      .get("/accounts/current-user/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setOwnerId(res.data.owner?.id || null);
+        console.log(res.data)
+      })
+      
+      .catch((err) => {
+        console.error("Error fetching current user:", err);
+      });
+  }, []);
+
+  // ✅ Fetch all marketplace products
   useEffect(() => {
     axios
       .get("https://ngererayo-backend.onrender.com/market/all-products/")
@@ -18,6 +37,7 @@ const ProductsSection: React.FC = () => {
         setProducts(res.data);
         setFilteredProducts(res.data);
         setLoading(false);
+        console.log(res.data) 
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
@@ -25,7 +45,7 @@ const ProductsSection: React.FC = () => {
       });
   }, []);
 
-  // Filter products based on search term
+  // ✅ Filter products based on search
   useEffect(() => {
     if (searchTerm === "") {
       setFilteredProducts(products);
@@ -39,13 +59,13 @@ const ProductsSection: React.FC = () => {
 
   return (
     <div>
-      <Header />
-
       <div className="py-20 bg-white/70">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
-              <h2 className="text-3xl text-green-700 font-bold">Featured Products</h2>
+              <h2 className="text-3xl text-green-700 font-bold">
+                Featured Products
+              </h2>
               <p>Choose from high-quality products from nearby trusted farmers</p>
             </div>
 
@@ -71,15 +91,17 @@ const ProductsSection: React.FC = () => {
                 <ProductCard
                   key={product.id}
                   product={{
-                    id: product.id,
-                    name: product.product_name,
-                    category: product.owner?.farming_name || "Unknown",
-                    price: `RWF ${product.price}`,
-                    rating: 4, // Default rating since API doesn't send one
-                    image: `https://ngererayo-backend.onrender.com${product.product_image}`,
-                    farmer: product.owner?.farming_name || "Unknown Farmer",
-                    description: product.description,
-                  }}
+                     id: product.id,
+                     name: product.product_name,
+                     price: `RWF ${product.price}`,
+                     rating: 4,
+                  
+                     image: product.product_image,
+                     farmer: product.owner?.farming_name || "Unknown Farmer",
+                     description: product.description,
+                   }}
+                   
+                  isOwner={ownerId === product.owner} // ✅ flag
                 />
               ))}
             </div>
@@ -92,8 +114,6 @@ const ProductsSection: React.FC = () => {
           </button>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

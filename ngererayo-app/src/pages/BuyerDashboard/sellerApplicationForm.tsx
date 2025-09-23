@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../utilis/api";
-import Footer from "../../components/landingpage/Footer";
-import Header from "./DashboardHeader";
 
 const SellerApplicationForm: React.FC = () => {
   const navigate = useNavigate();
@@ -67,13 +65,13 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-amber-50">
-      <Header />
+     
       
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {/* Application Header */}
           <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-3">
+            <h1 className="text-2xl md:text-2xl font-bold text-green-800 mb-3">
               Become a Verified Seller
             </h1>
             <p className="text-gray-600 max-w-md mx-auto">
@@ -85,7 +83,7 @@ const handleSubmit = async (e: React.FormEvent) => {
           <div className="mb-10">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-green-700">Application Progress</span>
-              <span className="text-sm font-medium text-green-700">1/2</span>
+              <span className="text-sm font-medium text-green-700">1/1</span>
             </div>
             <div className="h-2 bg-gray-200 rounded-full">
               <div className="h-2 bg-green-600 rounded-full w-1/2"></div>
@@ -263,7 +261,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         </div>
       </div>
       
-      <Footer />
+    
     </div>
   );
 };

@@ -28,7 +28,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="flex-1 outline-none text-black text-sm bg-transparent"
+          className="flex-1 outline-none text-gray-600 text-sm bg-transparent"
         />
         {rightIcon && <span className="ml-2">{rightIcon}</span>}
       </div>

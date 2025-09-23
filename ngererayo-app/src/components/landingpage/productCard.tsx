@@ -70,14 +70,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </button>
         </Link>
       
+          <Link to="/login">
+            <button
 
-        <button
-          onClick={openChat}
           className="border border-gray-500 p-2 rounded-xl cursor-pointer"
           aria-label={`Message seller about ${product.name}`}
         >
           <MessageCircle className="text-gray-500" />
         </button>
+          </Link>
+      
         </div>
      
     </div>

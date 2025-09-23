@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     { name: 'Marketplace', path: '#marketplace', icon: <Store size={16} /> },
     { name: 'Categories', path: '#categories', icon: <LayoutGrid size={16} /> },
     { name: 'Community', path: '#community', icon: <Users size={16} /> },
-    { name: 'Support', path: '/support', icon: <LifeBuoy size={16} /> },
+    { name: 'consultant', path: '#consultant', icon: <LifeBuoy size={16} /> },
     { name: 'Contact', path: '/contact', icon: <Phone size={16} /> },
   ];
 

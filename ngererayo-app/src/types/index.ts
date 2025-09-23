@@ -1,29 +1,22 @@
 export interface Product {
   id: string;
   name: string;
-  image: string;
-  category: string;
-  farmer: string;
-  price: string;
-  rating: number;
-  reviews: number;
-  location: string;
   description: string;
-  owner_name: string; 
-  owner: {
-    first_name: string;
-    rating: number;
-    reviews: number;
-  };
-  reviewsList: {
-    user: string;
-    comment: string;
-    date: string;
-  }[];
+  price: string;
+  quantity: number;    // 🔴 required
+  image: string;
+  rating: number;
+  owner: number;       // 🔴 required
+  farmer: string;
+  reviews?: any;
+  location?: string;
+  owner_name?: string;
+  reviewsList?: any;
 }
 
 
-export default interface Testimonial {
+
+export interface Testimonial {
   id: number;
   name: string;
   role: string;
@@ -39,16 +32,4 @@ export interface Category {
   productCount: number;
 }
 
-export interface Farmer {
-  id: number;
-  name: string;
-  location: string;
-  rating: number;
-  products: string[];
-  image: string;
-}
 
-export interface StatItem {
-  value: string;
-  label: string;
-}
