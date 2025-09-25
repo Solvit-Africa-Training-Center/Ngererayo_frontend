@@ -42,7 +42,7 @@ const DiscountForm: React.FC<DiscountFormProps> = ({
           onChange={(e) => onChange("type", e.target.value)}
           className="w-full border px-3 py-2 rounded"
         >
-          <option value="amount">Amount</option>
+          <option value="Fixed amount">Fixed amount</option>
           <option value="percentage">Percentage</option>
         </select>
       </div>

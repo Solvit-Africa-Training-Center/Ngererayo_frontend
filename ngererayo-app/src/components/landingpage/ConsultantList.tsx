@@ -10,6 +10,19 @@ interface Consultant {
   followers_count: number;
 }
 
+// Avatar component that displays the first letter of the user's name
+const UserAvatar: React.FC<{ name: string; className?: string }> = ({ name, className = "" }) => {
+  const getInitial = (name: string) => {
+    return name ? name.charAt(0).toUpperCase() : "?";
+  };
+
+  return (
+    <div className={`flex items-center justify-center rounded-full bg-blue-500 text-white font-semibold ${className}`}>
+      {getInitial(name)}
+    </div>
+  );
+};
+
 const ConsultantList: React.FC = () => {
   const [consultants, setConsultants] = useState<Consultant[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,8 +46,13 @@ const ConsultantList: React.FC = () => {
             key={consultant.id}
             className="min-w-[220px] p-4 rounded-xl shadow-sm bg-white hover:shadow-md transition"
           >
-            <h2 className="text-lg font-semibold">{consultant.user}</h2>
-            <p className="text-sm text-gray-600">{consultant.location}</p>
+            <div className="flex items-center space-x-3 mb-3">
+              <UserAvatar name={consultant.user} className="w-10 h-10 text-lg" />
+              <div>
+                <h2 className="text-lg font-semibold">{consultant.user}</h2>
+                <p className="text-sm text-gray-600">{consultant.location}</p>
+              </div>
+            </div>
             <p className="text-sm text-gray-500">
               Followers: {consultant.followers_count}
             </p>

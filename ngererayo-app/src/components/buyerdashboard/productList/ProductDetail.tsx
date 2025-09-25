@@ -5,6 +5,7 @@ import { CheckCircle, MessageSquare, Star, Shield, Truck, ArrowLeft, Heart, Shar
 import { api } from "../../../utilis/api";
 import ProductComments from "./ProductComments";
 import { useCart } from '../../../context/CartContext';
+import { toast } from "react-toastify";
 
 interface Product {
   id: string;
@@ -49,19 +50,23 @@ const ProductDetailPage: React.FC = () => {
   }, [productId]);
 
 
-  const handleAddToCart = () => {
+const handleAddToCart = () => {
   if (!product) return; // guard
 
   addToCart({
     id: product.id,
     name: product.product_name,
-    price: parseFloat(product.price.replace("RWF ", "").replace(",", "")),
+    price: Number(product.price), // ✅ safe numeric conversion
     image: product.product_image,
-    sellerId: product.owner.id.toString(),
-    sellerName: product.owner.farming_name,
+    sellerId: product.owner?.id?.toString() || "unknown", // ✅ safe fallback
+    sellerName: product.owner?.farming_name || "Unknown Farmer",
     unit: "piece",
   });
+   toast.success(`${product.product_name} added to cart`);
 };
+
+
+
 
 const openChat = (e: React.MouseEvent) => {
   e.stopPropagation();

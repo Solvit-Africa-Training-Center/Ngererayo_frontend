@@ -12,7 +12,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
   // Calculate order totals
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shipping = subtotal > 50 ? 0 : 5.99; // 
-  const tax = subtotal * 0.02; // 8% tax rate
+  const tax = subtotal * 0.00; // 8% tax rate
   const total = subtotal + shipping + tax;
 
   return (
@@ -29,10 +29,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
       </div>
       
       <div className="space-y-3 mb-6 text-sm">
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <span className="text-gray-600">Subtotal</span>
           <span className="font-medium">RWF{subtotal.toFixed(2)}</span>
-        </div>
+        </div> */}
         <div className="flex justify-between">
           <span className="text-gray-600">Shipping</span>
           <span className="font-medium">
@@ -43,10 +43,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
             )}
           </span>
         </div>
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
           <span className="text-gray-600">Tax (8%)</span>
           <span className="font-medium">${tax.toFixed(2)}</span>
-        </div>
+        </div> */}
       </div>
       
       <div className="border-t pt-4 mb-6">

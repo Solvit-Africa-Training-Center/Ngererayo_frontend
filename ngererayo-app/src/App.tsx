@@ -38,6 +38,7 @@ import ProductList from './components/sellerDashboard/MessageProductList';
 import MessagePage from './pages/SellerDashboard/MessagePage';
 import Consultants from './pages/BuyerDashboard/consultants/ConsultantPage';
 import ProductDiscountManagement from './pages/SellerDashboard/DiscountManagementPage';
+import ViewDiscountsPage from "./components/sellerDashboard/ManageDiscount/ViewDiscountsPage";
 
 //  import of consultant dashboard 
 import ConsultantDashboardLayout from './Layouts/ConsultantDashboardLayout';
@@ -101,6 +102,10 @@ const App: React.FC = () => {
          <Route path="messaging/:productId" element={<MessagePage />} />
 
          <Route path="discount" element={<ProductDiscountManagement />} />
+         
+
+         <Route path=":productId/discounts" element={<ViewDiscountsPage />} />
+
         </Route>
       
 

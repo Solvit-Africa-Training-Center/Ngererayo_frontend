@@ -29,21 +29,37 @@ const ProductsSection: React.FC = () => {
       });
   }, []);
 
-  // ✅ Fetch all marketplace products
-  useEffect(() => {
-    axios
-      .get("https://ngererayo-backend.onrender.com/market/all-products/")
-      .then((res) => {
-        setProducts(res.data);
-        setFilteredProducts(res.data);
-        setLoading(false);
-        console.log(res.data) 
-      })
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        console.error("No token found. Please log in.");
+        return;
+      }
+
+      const res = await axios.get(
+        "https://ngererayo-backend.onrender.com/market/all-products/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ pass token here
+          },
+        }
+      );
+
+      setProducts(res.data);
+      setFilteredProducts(res.data);
+      console.log("Fetched products:", res.data);
+      setLoading(false);
+      console.log("Fetched products with discounts:", res.data);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, []);
 
   // ✅ Filter products based on search
   useEffect(() => {
@@ -93,7 +109,7 @@ const ProductsSection: React.FC = () => {
                   product={{
                      id: product.id,
                      name: product.product_name,
-                     price: `RWF ${product.price}`,
+                     price: `RWF ${product.discounted_price}`,
                      rating: 4,
                   
                      image: product.product_image,

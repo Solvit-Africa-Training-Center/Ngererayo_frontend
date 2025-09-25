@@ -3,6 +3,7 @@ import { Star, MessageCircle } from 'lucide-react';
 import { useCart } from '../../../context/CartContext';
 import { Product } from '../../../types/index';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface ProductCardProps {
   product: Product;
@@ -27,6 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isOwner }) => {
       sellerName: product.farmer,
       unit: 'piece'
     });
+    toast.success(`${product.name} added to cart`);
   };
 
   const openChat = (e: React.MouseEvent) => {
@@ -60,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isOwner }) => {
               ))}
             </div>
           </div>
-          <p>{product.description}</p>
+     
         </div>
       </div>
 
