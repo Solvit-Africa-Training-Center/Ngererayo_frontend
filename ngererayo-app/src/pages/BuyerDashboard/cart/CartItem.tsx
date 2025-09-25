@@ -28,7 +28,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
         
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-gray-900 text-lg mb-1">{item.name}</h3>
-          <p className="text-gray-600">${item.price.toFixed(2)} per unit</p>
+          <p className="text-gray-600">{item.price.toFixed(2)} RWF per unit</p>
           <p className="text-sm text-gray-500 mt-1">In stock</p>
         </div>
         
@@ -54,7 +54,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
           </div>
           
           <div className="text-right min-w-0">
-            <p className="font-semibold text-lg text-gray-900">${itemTotal.toFixed(2)}</p>
+            <p className="font-semibold text-lg text-gray-900">{itemTotal.toFixed(2)} RWF</p>
           </div>
           
           <button

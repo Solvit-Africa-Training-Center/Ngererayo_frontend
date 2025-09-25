@@ -23,7 +23,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
         {items.map((item) => (
           <div key={item.id} className="flex justify-between text-sm text-gray-600">
             <span className="truncate mr-2">{item.name} × {item.quantity}</span>
-            <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+            <span className="font-medium">{(item.price * item.quantity).toFixed(2)} RWF</span>
           </div>
         ))}
       </div>
@@ -52,7 +52,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
       <div className="border-t pt-4 mb-6">
         <div className="flex justify-between text-lg font-semibold">
           <span className="text-gray-900">Total</span>
-          <span className="text-green-600">${total.toFixed(2)}</span>
+          <span className="text-green-600">{total.toFixed(2)} RWF</span>
         </div>
       </div>
       

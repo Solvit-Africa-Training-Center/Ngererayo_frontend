@@ -14,11 +14,7 @@ interface Product {
   price: string;
   quantity: number;
   product_image: string;
-  owner: {
-    id: number;
-    farming_name: string;
-    location: string;
-  };
+  owner: number;
 }
 
 const ProductDetailPage: React.FC = () => {
@@ -27,8 +23,31 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [ownerId, setOwnerId] = useState<number | null>(null);
   const navigate = useNavigate();
   const { addToCart } = useCart();
+
+  const isOwner = ownerId === product?.owner;
+
+
+    // ✅ Fetch logged-in user's ownerId
+    useEffect(() => {
+      const token = sessionStorage.getItem("token");
+      if (!token) return;
+  
+      api
+        .get("/accounts/current-user/", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setOwnerId(res.data.owner?.id || null);
+          console.log(res.data)
+        })
+        
+        .catch((err) => {
+          console.error("Error fetching current user:", err);
+        });
+    }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -177,10 +196,8 @@ const openChat = (e: React.MouseEvent) => {
               
               <div className="flex items-baseline gap-3 mb-4">
                 <span className="text-4xl font-bold text-green-600">RWF {product.price}</span>
-                <span className="text-lg text-gray-500 line-through">RWF {Number(product.price) * 1.2}</span>
-                <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm font-medium">
-                  20% OFF
-                </span>
+                {/* <span className="text-lg text-gray-500 line-through">RWF {Number(product.price) * 1.2}</span> */}
+                
               </div>
             </div>
 
@@ -206,12 +223,12 @@ const openChat = (e: React.MouseEvent) => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-gray-900">{product.owner.farming_name}</p>
+                
                   <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
                     <CheckCircle size={14} className="text-green-600" />
                     <span>Verified seller</span>
                     <span className="text-gray-400">•</span>
-                    <span>{product.owner.location}</span>
+                   
                   </div>
                   <div className="flex items-center gap-1 mt-2">
                     <Star size={14} className="text-yellow-400 fill-current" />
@@ -234,12 +251,22 @@ const openChat = (e: React.MouseEvent) => {
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-              <button 
+             {isOwner ? (
+          <p className="text-xs text-gray-500 italic w-full text-center">
+            This is your product
+          </p>
+        ) : (
+          <>
+            <button 
               onClick={handleAddToCart}
-              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 cursor-pointer
-               text-white py-4 rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all shadow-lg hover:shadow-xl">
-                Add to Cart
-              </button>
+              className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
+            >
+              Add to Cart
+            </button>
+
+            
+          </>
+        )}
            
             </div>
           </div>

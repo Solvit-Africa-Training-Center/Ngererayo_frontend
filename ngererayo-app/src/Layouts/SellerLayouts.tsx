@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/sellerDashboard/SideBar";
 import TopNavbar from "../components/sellerDashboard/TopNavbar";
-import Footer from "../components/landingpage/Footer";
+import Footer from "./Footer";
 
 const SellerLayout: React.FC = () => {
   return (

@@ -39,8 +39,8 @@ const AddEditPostForm: React.FC<PostFormProps> = ({ post, onSuccess, consultantI
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || (!post && !image)) {
-      toast.error("Please fill all fields and upload an image.");
+    if (!title || !description) {
+      toast.error("Please title and description fields are required.");
       return;
     }
 
@@ -121,7 +121,7 @@ const AddEditPostForm: React.FC<PostFormProps> = ({ post, onSuccess, consultantI
             placeholder="Enter post description"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200"
             rows={4}
-            required
+            
           />
         </div>
         
@@ -156,7 +156,7 @@ const AddEditPostForm: React.FC<PostFormProps> = ({ post, onSuccess, consultantI
                   onChange={handleImageChange}
                   className="hidden"
                   id="post-image-upload"
-                  required={!post}
+                 
                 />
                 <label
                   htmlFor="post-image-upload"

@@ -176,9 +176,7 @@ const ViewDiscountsPage: React.FC = () => {
         {discounts.length === 0 ? (
           <div className="text-center py-12">
             <div className="flex flex-col items-center justify-center">
-              <svg className="w-24 h-24 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-              </svg>
+              
               <h3 className="text-lg font-semibold text-gray-600 mb-2">No Discounts Found</h3>
               <p className="text-gray-500 max-w-md">
                 No discounts have been created for this product yet. Start by adding discounts to attract more customers.
@@ -226,6 +224,11 @@ const ViewDiscountsPage: React.FC = () => {
                               <span className="font-medium text-gray-900">{d.customer_username || d.customer}</span>
                             </div>
                           </td>
+                              <td className="px-6 py-4">
+                            <span className="text-lg font-semibold text-green-600">
+                              {d.product_name}
+                            </span>
+                          </td>
                           <td className="px-6 py-4">
                             <select
                               value={editType}
@@ -233,7 +236,7 @@ const ViewDiscountsPage: React.FC = () => {
                               className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             >
                               <option value="percent">Percentage</option>
-                              <option value="amount">Fixed Amount</option>
+                              <option value="Fixed">Fixed Amount</option>
                             </select>
                           </td>
                           <td className="px-6 py-4">

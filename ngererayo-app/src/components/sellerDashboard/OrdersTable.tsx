@@ -134,7 +134,7 @@ const SellerOrders: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Order Management</h1>
+      <h1 className="text-xl font-bold mb-6 text-gray-800">Order Management</h1>
 
       {orders.length === 0 ? (
         <div className="bg-white rounded-lg shadow p-6 text-center">

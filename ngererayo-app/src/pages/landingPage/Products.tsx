@@ -44,7 +44,7 @@ const ProductsSection: React.FC = () => {
                   // category: product.owner?.farming_name || "Unknown",
                   price: `RWF ${product.price}`,
                   rating: 4, // Default rating since API doesn't send one
-                  image: `https://ngererayo-backend.onrender.com${product.product_image}`,
+                  image: product.product_image,
                   // farmer: product.owner?.farming_name || "Unknown Farmer",
                   description: product.description,
                 }}

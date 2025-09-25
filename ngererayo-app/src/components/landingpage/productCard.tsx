@@ -19,12 +19,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     navigate(`/product/${product.id}`);
   };
 
-
-    // open chat for this product
-  const openChat = (e: React.MouseEvent) => {
-    e.stopPropagation(); 
-    navigate(`/product/${product.id}/chat`, { state: { product } });
-  };
   return (
     <div 
    
@@ -34,10 +28,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div onClick={handleClick} >
       <div className="h-48 bg-white relative">
         <img 
-          src={product.image} 
-          alt={product.name}
-          className="w-full h-full object-cover p-2 rounded-2xl"
-        />
+         src={product.image.startsWith("http") 
+           ? product.image 
+           : `https://ngererayo-backend.onrender.com${product.image}`
+         }
+         alt={product.name}
+         className="w-full h-full object-cover p-2 rounded-2xl"
+       />
         <div className="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-xs font-medium text-green-800">
           {product.category}
         </div>

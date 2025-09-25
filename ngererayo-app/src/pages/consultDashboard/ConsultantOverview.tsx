@@ -18,6 +18,8 @@ interface Post {
   created_at: string;
 }
 
+const BASE_URL = "https://ngererayo-backend.onrender.com";
+
 const ConsultantOverview: React.FC = () => {
   const [consultant, setConsultant] = useState<Consultant | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -120,7 +122,7 @@ const ConsultantOverview: React.FC = () => {
               >
                 {post.post_image && (
                   <img
-                    src={post.post_image}
+                    src={`${BASE_URL}${post.post_image}`}
                     alt={post.post_title}
                     className="w-full h-40 object-cover"
                   />

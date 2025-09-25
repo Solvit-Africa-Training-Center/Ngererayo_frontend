@@ -168,7 +168,7 @@ const OwnerProductsTable = forwardRef(
                     {product.description}
                   </td>
                   <td className="px-4 py-2 font-semibold text-gray-600">
-                    ${product.price}
+                    {product.price} RWF
                   </td>
                   <td className="px-4 py-2 text-gray-600">
                     {product.quantity}

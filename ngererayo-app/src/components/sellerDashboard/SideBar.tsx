@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink,Link } from "react-router-dom";
-import { LayoutGrid, ShoppingCart,MessageSquare, Package } from "lucide-react";
+import { LayoutGrid, ShoppingCart,MessageSquare,Percent, Package } from "lucide-react";
 import logo from '../../assets/images/LOGO.png';
+
+
 const Sidebar: React.FC = () => {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center space-x-2 px-4 py-2 rounded-lg ${
@@ -42,7 +44,7 @@ const Sidebar: React.FC = () => {
         <span>Messaging</span>
       </NavLink>
       <NavLink to="discount" className={linkClass}>
-        <MessageSquare size={20} />
+        <Percent size={20} />
         <span>Manage Discout</span>
       </NavLink>
       

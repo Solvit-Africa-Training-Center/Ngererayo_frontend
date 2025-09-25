@@ -140,7 +140,7 @@ const DiscountModal: React.FC<Props> = ({ product, onClose, onSuccess }) => {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 transition-all duration-200 font-medium shadow-sm hover:shadow-md"
+            className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 transition-all duration-200 font-medium shadow-sm hover:shadow-md"
           >
             {loading ? (
               <div className="flex items-center">

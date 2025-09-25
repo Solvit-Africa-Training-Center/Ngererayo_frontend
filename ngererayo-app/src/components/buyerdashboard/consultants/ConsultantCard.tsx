@@ -91,11 +91,9 @@ const ConsultantCard: React.FC<Props> = ({ consultant, onFollow }) => {
       <div className="p-6 flex flex-col items-center text-center">
         {/* Avatar */}
         <div className="relative mb-4">
-          <img
-            className="h-24 w-24 rounded-full object-cover border-4 border-green-100"
-            src={consultant.avatar || `https://i.pravatar.cc/150?u=${consultant.user}`}
-            alt={consultant.user}
-          />
+          <div className="h-24 w-24 rounded-full bg-green-800 flex items-center justify-center text-white text-3xl font-bold border-4 border-green-100">
+           {consultant.user.charAt(0).toUpperCase()}
+          </div>
         </div>
 
         {/* Name & Location */}

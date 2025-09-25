@@ -67,22 +67,22 @@ const ShoppingCart: React.FC = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-gray-400">
                     <span>Subtotal</span>
-                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">$0.00</span>
+                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">RWF0.00</span>
                   </div>
                   <div className="flex justify-between text-gray-400">
                     <span>Shipping</span>
-                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">$0.00</span>
+                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">RWF0.00</span>
                   </div>
                   <div className="flex justify-between text-gray-400">
                     <span>Tax</span>
-                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">$0.00</span>
+                    <span className="bg-yellow-100 px-2 py-1 rounded text-xs font-mono">RWF0.00</span>
                   </div>
                 </div>
                 
                 <div className="border-t pt-4 mb-6">
                   <div className="flex justify-between text-xl font-semibold">
                     <span className="text-gray-400">Total</span>
-                    <span className="bg-yellow-200 px-3 py-2 rounded font-mono text-gray-600">$0.00</span>
+                    <span className="bg-yellow-200 px-3 py-2 rounded font-mono text-gray-600">RWF0.00</span>
                   </div>
                 </div>
                 

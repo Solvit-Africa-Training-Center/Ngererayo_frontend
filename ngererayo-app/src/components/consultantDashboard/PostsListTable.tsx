@@ -13,6 +13,8 @@ interface Post {
 interface PostsTableProps {
   consultantId: number;
 }
+// Base URL of your backend (Django on Render)
+const BASE_URL = "https://ngererayo-backend.onrender.com";
 
 const PostsTable: React.FC<PostsTableProps> = ({ consultantId }) => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -125,7 +127,7 @@ const PostsTable: React.FC<PostsTableProps> = ({ consultantId }) => {
                       <tr key={post.id} className="hover:bg-blue-50 transition duration-150">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <img
-                            src={post.post_image}
+                            src={`${BASE_URL}${post.post_image}`}
                             alt={post.post_title}
                             className="h-16 w-16 object-cover rounded-lg border border-gray-400"
                           />
@@ -162,7 +164,7 @@ const PostsTable: React.FC<PostsTableProps> = ({ consultantId }) => {
 
           {/* Overlay for Add/Edit Post Form */}
           {(editingPost || showAddForm) && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="overlay-fallback">
               <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-6">
