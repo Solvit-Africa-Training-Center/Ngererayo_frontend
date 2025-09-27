@@ -8,7 +8,14 @@ const ProductList: React.FC = () => {
   const navigate = useNavigate();
   const { currentUser, loading: userLoading } = useCurrentUser(token);
   const { products, loading: productsLoading } = useOwnerProducts(currentUser?.owner_id || null, token);
+ 
+ 
+  const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
 
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
   if (userLoading) return (
     <div className="flex justify-center items-center h-64">
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
@@ -46,8 +53,8 @@ const ProductList: React.FC = () => {
               {/* Product Image */}
               <div className="relative h-48 w-full overflow-hidden">
                 <img
-                  src={product.product_image || "/api/placeholder/300/300"}
-                  alt={product.product_name}
+                   src={getImageUrl(product.product_image)}
+                   alt={product.product_image}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>

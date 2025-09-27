@@ -12,6 +12,12 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
+  const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
 
     const navigate = useNavigate();
 
@@ -28,9 +34,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div onClick={handleClick} >
       <div className="h-48 bg-white relative">
         <img 
-         src={product.image.startsWith("http") 
-           ? product.image 
-           : `https://ngererayo-backend.onrender.com${product.image}`
+         src={getImageUrl(product.image)
          }
          alt={product.name}
          className="w-full h-full object-cover p-2 rounded-2xl"

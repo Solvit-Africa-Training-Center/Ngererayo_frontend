@@ -12,12 +12,19 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
   // Calculate total price for this item (price × quantity)
   const itemTotal = item.price * item.quantity;
 
+     const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-400 p-6">
       <div className="flex items-center gap-4">
         <div className="flex-shrink-0">
           <img
-            src={item.image}
+            src={getImageUrl(item.image)}
             alt={item.name}
             className="w-20 h-20 rounded-lg object-cover"
             onError={(e) => {

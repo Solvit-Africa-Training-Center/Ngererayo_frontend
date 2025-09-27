@@ -26,6 +26,13 @@ const ProductDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+    const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -69,7 +76,7 @@ const ProductDetailPage: React.FC = () => {
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div>
           <img
-            src={`https://ngererayo-backend.onrender.com${product.product_image}`}
+            src={getImageUrl(product.product_image)}
             alt={product.product_name}
             className="w-full h-[400px] object-cover rounded-xl"
           />

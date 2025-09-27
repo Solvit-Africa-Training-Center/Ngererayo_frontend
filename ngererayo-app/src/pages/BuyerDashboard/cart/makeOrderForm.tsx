@@ -13,6 +13,12 @@ const OrderForm: React.FC = () => {
   const [errors, setErrors] = useState<{ address?: string }>({});
   const [loading, setLoading] = useState(false);
 
+const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -160,7 +166,7 @@ const OrderForm: React.FC = () => {
                     <div key={item.id} className="flex items-center py-5">
                       <div className="relative">
                         <img
-                          src={item.image}
+                          src={getImageUrl(item.image)}
                           alt={item.name}
                           className="w-20 h-20 object-cover rounded-lg shadow-sm"
                         />

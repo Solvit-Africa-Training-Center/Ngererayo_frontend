@@ -29,6 +29,13 @@ const ProductDetailPage: React.FC = () => {
 
   const isOwner = ownerId === product?.owner;
 
+  const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
+
 
     // ✅ Fetch logged-in user's ownerId
     useEffect(() => {
@@ -58,6 +65,8 @@ const ProductDetailPage: React.FC = () => {
           },
         });
         setProduct(response.data);
+        console.log("Product image URL:", response.data.product_image);
+
       } catch (err) {
         console.error("Error fetching product:", err);
       } finally {
@@ -83,7 +92,6 @@ const handleAddToCart = () => {
   });
    toast.success(`${product.product_name} added to cart`);
 };
-
 
 
 
@@ -149,11 +157,15 @@ const openChat = (e: React.MouseEvent) => {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-              <img
-                src={`https://ngererayo-backend.onrender.com${product.product_image}`}
-                alt={product.product_name}
-                className="w-full h-96 object-cover rounded-xl"
-              />
+<img
+  src={getImageUrl(product.product_image)}
+  alt={product.product_name}
+  className="max-w-full max-h-[500px] object-contain rounded-xl"
+/>
+
+
+
+
             </div>
             <div className="flex gap-3 overflow-x-auto pb-2">
               {[1, 2, 3].map((_, index) => (
@@ -164,11 +176,15 @@ const openChat = (e: React.MouseEvent) => {
                     selectedImage === index ? 'border-green-500' : 'border-gray-200'
                   }`}
                 >
-                  <img
-                    src={`https://ngererayo-backend.onrender.com${product.product_image}`}
-                    alt={`${product.product_name} ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+<img
+  src={getImageUrl(product.product_image)}
+  alt={product.product_name}
+  className="w-full h-full object-cover"
+/>
+
+
+
+
                 </button>
               ))}
             </div>

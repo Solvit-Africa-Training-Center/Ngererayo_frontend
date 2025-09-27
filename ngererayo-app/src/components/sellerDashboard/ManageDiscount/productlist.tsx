@@ -32,6 +32,13 @@ const OwnerProductsTable = forwardRef(
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
     const itemsPerPage = 5;
 
+
+const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
     // Close menu when clicking outside
     useEffect(() => {
       const handleClickOutside = () => {
@@ -178,8 +185,8 @@ const OwnerProductsTable = forwardRef(
                     <td className="px-6 py-4">
                       <div className="relative">
                         <img
-                          src={product.product_image}
-                          alt={product.product_name}
+                           src={getImageUrl(product.product_image)}
+                       alt={product.product_image}
                           className="h-14 w-14 object-cover rounded-lg border-2 border-gray-200 group-hover:border-blue-300 transition-colors duration-200"
                         />
                       </div>

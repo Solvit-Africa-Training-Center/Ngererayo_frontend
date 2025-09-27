@@ -45,6 +45,12 @@ const ConsultantPosts: React.FC = () => {
 
  const token = sessionStorage.getItem("token"); // or wherever you store it
 
+ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
 const fetchData = async () => {
   try {
     const [postsRes, consultantsRes] = await Promise.all([
@@ -203,7 +209,7 @@ useEffect(() => {
                     {consultant ? (
                       consultant.profile_image ? (
                         <img
-                          src={`${BASE_URL}${consultant.profile_image}`}
+                          src={getImageUrl(consultant.profile_image)}
                           alt={consultant.user}
                           className="w-full h-full rounded-full object-cover"
                         />
@@ -241,7 +247,7 @@ useEffect(() => {
             {post.post_image && (
               <div className="px-6 pb-6">
                 <img
-                  src={`${BASE_URL}${post.post_image}`}
+                  src={getImageUrl(post.post_image)}
                   alt={post.post_title}
                   className="w-full h-80 object-cover rounded-xl shadow-md"
                 />

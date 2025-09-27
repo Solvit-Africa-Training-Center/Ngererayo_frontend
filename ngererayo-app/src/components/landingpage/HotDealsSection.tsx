@@ -1,36 +1,38 @@
-// components/HotDealsSection.tsx
 import React from 'react';
 import DealCard from './DealCard';
+import { useTranslation } from 'react-i18next';
 
 const HotDealsSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-orange-50 border border-orange-200 p-6 rounded-xl mb-10">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-red-600">
-          🔥 Hot Deals Today
+           {t('hotDealsToday')}
         </h2>
         <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
-          SPECIAL PRICES
+          {t('specialPrices')}
         </span>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <DealCard
-          productName="Fresh Avocados"
+          productName={t('freshAvocados')}
           price={350}
-          unit="Kg"
+          unit={t('kg')}
           discount={20}
-          description="Limited time offer · Until 10PM"
-          onBuy={() => alert('Buying Fresh Avocados')}
+          description={t('limitedTimeOffer')}
+          onBuy={() => alert(t('buying', { product: t('freshAvocados') }))}
         />
 
         <DealCard
-          productName="Premium Rice"
+          productName={t('premiumRice')}
           price={1200}
-          unit="Kg"
+          unit={t('kg')}
           discount={15}
-          description="Buy now · Deal ends soon"
-          onBuy={() => alert('Buying Premium Rice')}
+          description={t('dealEndsSoon')}
+          onBuy={() => alert(t('buying', { product: t('premiumRice') }))}
         />
       </div>
     </section>

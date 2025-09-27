@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 import { Users, TrendingUp, Smile, Headphones } from "lucide-react";
 import StatCard from "../../components/landingpage/StatCard";
 
@@ -13,7 +14,12 @@ const StatsSection: React.FC = () => {
   const [activeFarmers, setActiveFarmers] = useState<number>(0);
   const [productsListed, setProductsListed] = useState<number>(0);
 
+
+  const { t } = useTranslation();
+
   useEffect(() => {
+
+    
     // Fetch farmers
     axios
       .get("https://ngererayo-backend.onrender.com/market/owners/")
@@ -28,10 +34,10 @@ const StatsSection: React.FC = () => {
   }, []);
 
   const stats: StatItem[] = [
-    { value: activeFarmers, label: "Active Farmers", icon: Users },
-    { value: productsListed, label: "Products Listed", icon: TrendingUp },
-    { value: "97%", label: "Satisfaction Rate", icon: Smile },
-    { value: "24/7", label: "Support Available", icon: Headphones },
+     { value: activeFarmers, label: t('activeFarmers'), icon: Users },
+    { value: productsListed, label: t('productsListed'), icon: TrendingUp },
+    { value: "97%", label: t('satisfactionRate'), icon: Smile },
+    { value: "24/7", label: t('supportAvailable'), icon: Headphones },
   ];
 
   return (

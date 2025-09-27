@@ -1,0 +1,40 @@
+{
+  "agriculturalMarketplace":"Agricultural Marketplace",
+  "marketplace": "Marketplace",
+  "categories": "Categories",
+  "community": "Community",
+  "consultant": "Consultant",
+  "contact": "Contact",
+  "searchPlaceholder": "Search Products...",
+
+
+  "welcomeTo": "Welcome to",
+  "rwandaDigitalMarketplace": "Rwanda’s Digital Agricultural Marketplace",
+  "connectingFarmersBuyers": "Connecting Farmers and Buyers Nationwide",
+  "connectWithNearbyFarmers": "Connect with nearby farmers, buy fresh agricultural products, and support local rural economy.",
+  "signUpNow": "Sign up Now",
+  "login": "Login",
+
+  "activeFarmers": "Active Farmers",
+  "productsListed": "Products Listed",
+  "satisfactionRate": "Satisfaction Rate",
+  "supportAvailable": "Support Available",
+
+  
+  "hotDealsToday": "Hot Deals Today",
+  "specialPrices": "SPECIAL PRICES",
+  "freshAvocados": "Fresh Avocados",
+  "premiumRice": "Premium Rice",
+  "kg": "Kg",
+  "limitedTimeOffer": "Limited time offer · Until 10PM",
+  "dealEndsSoon": "Buy now · Deal ends soon",
+  "buyNow": "Buy Now",
+  "buying": "Buying {{product}}...",
+
+
+
+  "meetOurConsultants": "Meet Our Consultants",
+  "whatOurCommunitySays": "What Our Community Says"
+}
+
+

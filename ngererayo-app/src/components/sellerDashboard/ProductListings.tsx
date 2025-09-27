@@ -37,6 +37,13 @@ const OwnerProductsTable = forwardRef(
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 
+ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
+//
     useEffect(() => {
       const fetchProducts = async () => {
         try {
@@ -156,8 +163,8 @@ const OwnerProductsTable = forwardRef(
                 >
                   <td className="px-4 py-2">
                     <img
-                      src={product.product_image}
-                      alt={product.product_name}
+                      src={getImageUrl(product.product_image)}
+                       alt={product.product_image}
                       className="h-12 w-12 object-cover rounded-md border"
                     />
                   </td>

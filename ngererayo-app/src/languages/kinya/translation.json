@@ -1,0 +1,38 @@
+{
+  
+  "agriculturalMarketplace":"Isoko ryubuhinzi",
+  "marketplace": "Isoko",
+  "categories": "Ibyiciro",
+  "community": "Umuryango",
+  "consultant": "Umujyanama",
+  "contact": "Tuvugishe",
+  "searchPlaceholder": "Shakisha Ibicuruzwa...",
+
+
+  "welcomeTo": "Murakaza neza kuri",
+  "rwandaDigitalMarketplace": "Isoko rya Digital ry’Ubuhinzi mu Rwanda",
+  "connectingFarmersBuyers": "Guhuza Abahinzi n’Abaguzi mu gihugu hose",
+  "connectWithNearbyFarmers": "Hura n’abahinzi bo hafi, ugure ibicuruzwa bishya, kandi ufashe ubukungu bwo mu cyaro.",
+  "signUpNow": "Iyandikishe Ubu",
+  "login": "Injira",
+
+  "activeFarmers": "Abahinzi Bakora",
+  "productsListed": "Ibicuruzwa",
+  "satisfactionRate": "Urwego rw'Ibyishimo",
+  "supportAvailable": "Igihe Dukora",
+
+
+  
+  "hotDealsToday": "Amagurisho Ashyushye Uyu Munsi",
+  "specialPrices": "Ibiciro by'ihariye",
+  "freshAvocados": "Avoka Nshya",
+  "premiumRice": "Umuceri Mwiza",
+  "kg": "Kg",
+  "limitedTimeOffer": "Igihe gito cyo kugura · Kugera saa 10 z'ijoro",
+  "dealEndsSoon": "Gura ubu · Igihe kirarangiye vuba",
+  "buyNow": "Gura nonaha",
+  "buying": "Uri kugura {{product}}...",
+
+  "meetOurConsultants": "Hura n’Abajyanama bacu",
+  "whatOurCommunitySays": "Icyo Community yacu ivuga"
+}

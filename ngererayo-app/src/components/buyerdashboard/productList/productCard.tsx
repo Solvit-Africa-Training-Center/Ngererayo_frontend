@@ -14,6 +14,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isOwner }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
+    const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
+
+const getImageUrl = (image: string) => {
+  if (!image) return "/placeholder.png"; 
+  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+};
+
   const handleClick = () => {
     navigate(`/buyer/product/${product.id}`);
   };
@@ -40,14 +47,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isOwner }) => {
     <div className="bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-lg transition">
       <div onClick={handleClick}>
         <div className="h-48 bg-white relative">
-        <img 
-         src={product.image.startsWith("http") 
-           ? product.image 
-           : `https://ngererayo-backend.onrender.com${product.image}`
-         }
-         alt={product.name}
-         className="w-full h-full object-cover p-2 rounded-2xl"
-       />
+ <img
+  src={getImageUrl(product.image)}
+  alt={product.name}
+  className="w-full h-full object-cover"
+/>
+
+
 
           
         </div>

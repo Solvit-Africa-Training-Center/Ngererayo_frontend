@@ -1,5 +1,5 @@
-// components/DealCard.tsx
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type DealCardProps = {
   productName: string;
@@ -18,6 +18,8 @@ const DealCard: React.FC<DealCardProps> = ({
   description,
   onBuy,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col gap-2 shadow-md w-full max-w-xs">
       <div className="flex justify-between items-center">
@@ -27,12 +29,14 @@ const DealCard: React.FC<DealCardProps> = ({
         </span>
       </div>
       <h3 className="font-semibold text-lg text-green-800">{productName}</h3>
-      <p className="text-sm text-gray-600">{price} Rwf/{unit}</p>
+      <p className="text-sm text-gray-600">
+        {price} Rwf/{unit}
+      </p>
       <button
         onClick={onBuy}
         className="bg-green-600 hover:bg-green-700 text-white py-1.5 rounded-md mt-auto"
       >
-        Buy Now
+        {t('buyNow')}
       </button>
     </div>
   );
