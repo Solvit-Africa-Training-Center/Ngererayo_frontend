@@ -1,9 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Search,ShoppingCart,User,Bell,Globe,Menu,X,Phone,Briefcase ,LayoutGrid,Store,LogOut,Users,
+  Search,
+  ShoppingCart,
+  User,
+  Bell,
+  Globe,
+  Menu,
+  X,
+  Phone,
+  Briefcase,
+  LayoutGrid,
+  Store,
+  LogOut,
+  Users,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useTranslation } from 'react-i18next';
 import logo from '../../assets/images/LOGO.png';
 import { api } from '../../utilis/api';
 
@@ -13,8 +26,10 @@ interface UserRole {
 }
 
 const Header: React.FC = () => {
+  const { t,i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
   const [role, setRole] = useState<UserRole[]>([]);
@@ -25,25 +40,26 @@ const Header: React.FC = () => {
   const cartCount = getCartItemCount();
   const navigate = useNavigate();
 
-  const navLinks = [
-    { name: "Home", path: "/buyer/home", icon: <Store size={16} /> },
-    { name: "Marketplace", path: "/buyer/marketplace", icon: <Store size={16} /> },
-    { name: "Categories", path: "#categories", icon: <LayoutGrid size={16} /> },
-    { name: "Consultant", path: "/buyer/consultant", icon: <Users size={16} /> },
-    { name: "Contact", path: "/buyer/contact", icon: <Phone size={16} /> },
-  ];
+const navLinks = [
+  { key: 'home', path: '/buyer/home', icon: <Store size={16} /> },
+  { key: 'marketplace', path: '/buyer/marketplace', icon: <Store size={16} /> },
+  { key: 'categories', path: '#categories', icon: <LayoutGrid size={16} /> },
+  { key: 'consultant', path: '/buyer/consultant', icon: <Users size={16} /> },
+  { key: 'contact', path: '/buyer/contact', icon: <Phone size={16} /> },
+];
+
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem('token');
     if (token) {
       api
-        .get("/accounts/current-user/", {
+        .get('/accounts/current-user/', {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
           setUsername(res.data.username || res.data.first_name || res.data.email);
           setEmail(res.data.email);
-          setRole(res.data.role || []); // role is an array of {id, name}
+          setRole(res.data.role || []);
         })
         .catch(() => {
           setUsername(null);
@@ -53,28 +69,36 @@ const Header: React.FC = () => {
     }
   }, []);
 
-  // ✅ Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
+      if (!(event.target as Element).closest('.language-dropdown')) {
+        setIsLanguageOpen(false);
+      }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setIsLanguageOpen(false);
+  };
+
   const navigateToDashboard = () => {
-    if (role.some(r => r.name === "farmer")) navigate("/seller-dashboard");
-    else if (role.some(r => r.name === "buyer")) navigate("/buyer");
-    else navigate("/");
+    if (role.some((r) => r.name === 'farmer')) navigate('/seller-dashboard');
+    else if (role.some((r) => r.name === 'buyer')) navigate('/buyer');
+    else navigate('/');
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem("token");
+    sessionStorage.removeItem('token');
     setUsername(null);
     setRole([]);
-    navigate("/login", { replace: true });
+    navigate('/login', { replace: true });
   };
 
   const handleScroll = (hash: string) => {
@@ -96,37 +120,63 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex space-x-6 items-center">
-          {navLinks.map((item) =>
-            item.path.startsWith('#') ? (
-              <button
-                key={item.name}
-                onClick={() => handleScroll(item.path)}
-                className="flex items-center cursor-pointer space-x-1 text-sm text-gray-800 hover:text-green-600"
-              >
-                {item.icon}
-                <span>{item.name}</span>
-              </button>
-            ) : (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="flex items-center cursor-pointer space-x-1 text-sm text-gray-800 hover:text-green-600"
-              >
-                {item.icon}
-                <span>{item.name}</span>
-              </Link>
-            )
-          )}
-        </nav>
+       {navLinks.map((item) =>
+  item.path.startsWith('#') ? (
+    <button
+      key={item.key}
+      onClick={() => handleScroll(item.path)}
+      className="flex items-center cursor-pointer space-x-1 text-sm text-gray-800 hover:text-green-600"
+    >
+      {item.icon}
+      <span>{t(item.key)}</span>
+    </button>
+  ) : (
+    <Link
+      key={item.key}
+      to={item.path}
+      className="flex items-center cursor-pointer space-x-1 text-sm text-gray-800 hover:text-green-600"
+    >
+      {item.icon}
+      <span>{t(item.key)}</span>
+    </Link>
+  )
+)}
+
 
         {/* Right Icons */}
         <div className="hidden lg:flex items-center space-x-4 relative">
-          <button className="text-sm text-black flex items-center space-x-1 hover:text-green-600">
-            <Globe size={16} />
-            <span>EN</span>
-          </button>
+          {/* Language Dropdown */}
+          <div className="relative language-dropdown">
+            <button
+              className="text-sm text-black flex items-center space-x-1 hover:text-green-600"
+              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+            >
+              <Globe size={16} />
+              <span>{(i18n.language || 'en').toUpperCase()}</span>
+            </button>
+            {isLanguageOpen && (
+              <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded shadow-lg flex flex-col z-50">
+                <button
+                  onClick={() => changeLanguage('en')}
+                  className="px-4 py-2 hover:bg-green-100 text-left"
+                >
+                  English
+                </button>
+                <button
+                  onClick={() => changeLanguage('rw')}
+                  className="px-4 py-2 hover:bg-green-100 text-left"
+                >
+                  Kinyarwanda
+                </button>
+                <button
+                  onClick={() => changeLanguage('fr')}
+                  className="px-4 py-2 hover:bg-green-100 text-left"
+                >
+                  Français
+                </button>
+              </div>
+            )}
+          </div>
 
           <Link to="/buyer/cart" className="text-black hover:text-green-600 relative">
             <ShoppingCart size={20} />
@@ -144,18 +194,13 @@ const Header: React.FC = () => {
           {/* User Dropdown */}
           {username ? (
             <div className="relative" ref={dropdownRef}>
-              <div className='flex bg-gray-100 p-1 rounded-2xl cursor-pointer hover:text-green-500' 
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-               <button
-                
-                className="flex items-center space-x-1 text-black"
+              <div
+                className="flex bg-gray-100 p-1 rounded-2xl cursor-pointer hover:text-green-500"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <User size={20} />
-              </button>
-              <span>{username}</span>
+                <span className="ml-2">{username}</span>
               </div>
-            
-
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-70 bg-white border border-gray-300 rounded-xl shadow-lg py-2 z-50">
                   {/* User Info */}
@@ -165,10 +210,10 @@ const Header: React.FC = () => {
                     <p className="text-sm text-gray-500">{email}</p>
                   </div>
 
-                  {/* Profile */}
+                  {/* Profile & Dashboards */}
                   <button
                     onClick={() => {
-                      navigate("/buyer/user-profile");
+                      navigate('/buyer/user-profile');
                       setIsDropdownOpen(false);
                     }}
                     className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
@@ -176,8 +221,7 @@ const Header: React.FC = () => {
                     <User size={20} className="mr-2" /> Profile
                   </button>
 
-                  {/* Seller Dashboard button for farmers */}
-                  {role.some(r => r.name === "farmer") && (
+                  {role.some((r) => r.name === 'farmer') && (
                     <button
                       onClick={() => {
                         navigateToDashboard();
@@ -185,28 +229,26 @@ const Header: React.FC = () => {
                       }}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     >
-                     <Store size={20} className="mr-2"  /> Seller Dashboard
+                      <Store size={20} className="mr-2" /> Seller Dashboard
                     </button>
                   )}
 
-                  {/* Consultant Dashboard button */}
-                  {role.some(r => r.name === "consultant") && (
+                  {role.some((r) => r.name === 'consultant') && (
                     <button
                       onClick={() => {
-                        navigate("/consultant-board");
+                        navigate('/consultant-board');
                         setIsDropdownOpen(false);
                       }}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                     >
-                    <Briefcase size={20} className="mr-2"  />  Consultant Dashboard
+                      <Briefcase size={20} className="mr-2" /> Consultant Dashboard
                     </button>
                   )}
 
-                  {/* Become a Seller button for non-farmers */}
-                  {!role.some(r => r.name === "farmer") && (
+                  {!role.some((r) => r.name === 'farmer') && (
                     <button
                       onClick={() => {
-                        navigate("/buyer/become-seller");
+                        navigate('/buyer/become-seller');
                         setIsDropdownOpen(false);
                       }}
                       className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -236,15 +278,12 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button
-          className="lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        <button className="lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* ✅ Logout Modal */}
+      {/* Logout Modal */}
       {showLogoutModal && (
         <div className="overlay-fallback fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-80">

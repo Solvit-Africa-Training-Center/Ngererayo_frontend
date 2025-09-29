@@ -34,5 +34,42 @@
   "buying": "Uri kugura {{product}}...",
 
   "meetOurConsultants": "Hura n’Abajyanama bacu",
-  "whatOurCommunitySays": "Icyo Community yacu ivuga"
+  "whatOurCommunitySays": "Icyo Community yacu ivuga",
+
+  
+  "loginTitle": "Injira muri Konti Yawe",
+  "loginSubtitle": "Injiza imeri na ijambo ry'ibanga",
+  "continueWithGoogle": "Komeza ukoresheje Google",
+  "orLogin": "Cyangwa winjire ukoresheje imeri",
+  "emailPlaceholder": "Aderesi ya Imeri",
+  "passwordPlaceholder": "Ijambo ry'ibanga",
+  "rememberMe": "Unyibuke",
+  "forgotPassword": "Wibagiwe ijambo ry'ibanga?",
+  "loginButton": "Injira",
+  "noAccount": "Nta konti ufite?",
+  "createAccount": "Fungura imwe",
+  "invalidCredentials": "Imeri cyangwa ijambo ry'ibanga sibyo",
+
+  
+  "registerTitle": "Fungura Konti Yawe",
+  "registerSubtitle": "Injiza amakuru yawe kugira utangire",
+  "continueWithGoogle": "Komeza ukoresheje Google",
+  "orRegisterWithEmail": "Cyangwa wifashishe imeri",
+  "usernamePlaceholder": "Izina ukoresha",
+  "firstNamePlaceholder": "Izina",
+  "lastNamePlaceholder": "Izina ry’umuryango",
+  "emailPlaceholder": "Aderesi ya Imeri",
+  "phonePlaceholder": "Numero ya Telefone",
+  "passwordPlaceholder": "Shyiraho ijambo ry'ibanga rikomeye",
+  "confirmPasswordPlaceholder": "Emeza ijambo ry'ibanga",
+  "backButton": "Subira inyuma",
+  "createAccountButton": "Fungura Konti",
+  "alreadyHaveAccount": "Niba usanzwe ufite konti",
+  "loginLink": "injira",
+  "passwordMismatch": "Amagambo y’ibanga ntahura",
+  "accountCreated": "Konti yakozwe neza!",
+  "registrationFailed": "Kwiyandikisha byanze"
+
+
+
 }

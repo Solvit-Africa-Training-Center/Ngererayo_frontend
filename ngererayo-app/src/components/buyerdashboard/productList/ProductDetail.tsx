@@ -1,6 +1,6 @@
 // pages/marketplace/ProductDetailPage.tsx
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate,Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { CheckCircle, MessageSquare, Star, Shield, Truck, ArrowLeft, Heart, Share2 } from "lucide-react";
 import { api } from "../../../utilis/api";
 import ProductComments from "./ProductComments";
@@ -12,6 +12,7 @@ interface Product {
   product_name: string;
   description: string;
   price: string;
+  discounted_price?: string;
   quantity: number;
   product_image: string;
   owner: number;
@@ -31,42 +32,42 @@ const ProductDetailPage: React.FC = () => {
 
   const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/da16ppdly/";
 
-const getImageUrl = (image: string) => {
-  if (!image) return "/placeholder.png"; 
-  return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
-};
+  const getImageUrl = (image: string) => {
+    if (!image) return "/placeholder.png"; 
+    return image.startsWith("http") ? image : `${CLOUDINARY_BASE_URL}${image}`;
+  };
 
+  // Fetch current logged-in user
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    if (!token) return;
 
-    // ✅ Fetch logged-in user's ownerId
-    useEffect(() => {
-      const token = sessionStorage.getItem("token");
-      if (!token) return;
-  
-      api
-        .get("/accounts/current-user/", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          setOwnerId(res.data.owner?.id || null);
-          console.log(res.data)
-        })
-        
-        .catch((err) => {
-          console.error("Error fetching current user:", err);
-        });
-    }, []);
+    api.get("/accounts/current-user/", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => setOwnerId(res.data.owner?.id || null))
+      .catch((err) => console.error("Error fetching current user:", err));
+  }, []);
 
+  // Fetch product with token for user-specific discounts
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        const token = sessionStorage.getItem("token");
+        if (!token) {
+          console.error("No token found. Please log in.");
+          return;
+        }
+
         const response = await api.get(`/market/product/${productId}/`, {
           headers: {
             accept: "application/json",
+            Authorization: `Bearer ${token}`, // ✅ include token
           },
         });
-        setProduct(response.data);
-        console.log("Product image URL:", response.data.product_image);
 
+        setProduct(response.data);
+        console.log("Fetched product:", response.data);
       } catch (err) {
         console.error("Error fetching product:", err);
       } finally {
@@ -77,36 +78,33 @@ const getImageUrl = (image: string) => {
     fetchProduct();
   }, [productId]);
 
+  const handleAddToCart = () => {
+    if (!product) return;
 
-const handleAddToCart = () => {
-  if (!product) return; // guard
+    addToCart({
+      id: product.id,
+      name: product.product_name,
+      price: Number(product.discounted_price || product.price),
+      image: product.product_image,
+      sellerId: product.owner?.toString() || "unknown",
+      sellerName: "Unknown Farmer",
+      unit: "piece",
+    });
+    toast.success(`${product.product_name} added to cart`);
+  };
 
-  addToCart({
-    id: product.id,
-    name: product.product_name,
-    price: Number(product.price), // ✅ safe numeric conversion
-    image: product.product_image,
-    sellerId: product.owner?.id?.toString() || "unknown", // ✅ safe fallback
-    sellerName: product.owner?.farming_name || "Unknown Farmer",
-    unit: "piece",
-  });
-   toast.success(`${product.product_name} added to cart`);
-};
-
-
-
-const openChat = (e: React.MouseEvent) => {
-  e.stopPropagation();
-  if (!product) return; // guard
-  navigate(`/buyer/product/${product.id}/chat`, { state: { product } });
-};
+  const openChat = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!product) return;
+    navigate(`/buyer/product/${product.id}/chat`, { state: { product } });
+  };
 
   if (loading) return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-green-50 flex items-center justify-center">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500"></div>
     </div>
   );
-  
+
   if (!product) return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-green-50 flex items-center justify-center">
       <div className="text-center">
@@ -131,8 +129,7 @@ const openChat = (e: React.MouseEvent) => {
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-green-600 hover:text-green-700 font-medium transition-colors"
             >
-              <ArrowLeft size={20} />
-              Back to Marketplace
+              <ArrowLeft size={20} /> Back to Marketplace
             </button>
             <div className="flex items-center gap-3">
               <button 
@@ -157,15 +154,11 @@ const openChat = (e: React.MouseEvent) => {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-<img
-  src={getImageUrl(product.product_image)}
-  alt={product.product_name}
-  className="max-w-full max-h-[500px] object-contain rounded-xl"
-/>
-
-
-
-
+              <img
+                src={getImageUrl(product.product_image)}
+                alt={product.product_name}
+                className="max-w-full max-h-[500px] object-contain rounded-xl"
+              />
             </div>
             <div className="flex gap-3 overflow-x-auto pb-2">
               {[1, 2, 3].map((_, index) => (
@@ -176,15 +169,11 @@ const openChat = (e: React.MouseEvent) => {
                     selectedImage === index ? 'border-green-500' : 'border-gray-200'
                   }`}
                 >
-<img
-  src={getImageUrl(product.product_image)}
-  alt={product.product_name}
-  className="w-full h-full object-cover"
-/>
-
-
-
-
+                  <img
+                    src={getImageUrl(product.product_image)}
+                    alt={product.product_name}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -211,9 +200,20 @@ const openChat = (e: React.MouseEvent) => {
               </div>
               
               <div className="flex items-baseline gap-3 mb-4">
-                <span className="text-4xl font-bold text-green-600">RWF {product.price}</span>
-                {/* <span className="text-lg text-gray-500 line-through">RWF {Number(product.price) * 1.2}</span> */}
-                
+                {product.discounted_price ? (
+                  <>
+                    <span className="text-4xl font-bold text-green-600">
+                      RWF {product.discounted_price}
+                    </span>
+                    <span className="text-lg text-gray-500 line-through">
+                      RWF {product.price}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-4xl font-bold text-green-600">
+                    RWF {product.price}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -239,12 +239,10 @@ const openChat = (e: React.MouseEvent) => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                
                   <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
                     <CheckCircle size={14} className="text-green-600" />
                     <span>Verified seller</span>
                     <span className="text-gray-400">•</span>
-                   
                   </div>
                   <div className="flex items-center gap-1 mt-2">
                     <Star size={14} className="text-yellow-400 fill-current" />
@@ -252,38 +250,30 @@ const openChat = (e: React.MouseEvent) => {
                     <span className="text-sm text-gray-500">(128 reviews)</span>
                   </div>
                 </div>
-
-               <button 
-               onClick={openChat}
-               className="bg-green-600 text-white px-6 py-3 rounded-xl cursor-pointer flex items-center gap-2 hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
-               aria-label={`Message seller about ${product.product_name}`}
-             >
-               <MessageSquare size={18} /> Contact Seller
-             </button>
-             
-                
+                <button 
+                  onClick={openChat}
+                  className="bg-green-600 text-white px-6 py-3 rounded-xl cursor-pointer flex items-center gap-2 hover:bg-green-700 transition-colors shadow-md hover:shadow-lg"
+                  aria-label={`Message seller about ${product.product_name}`}
+                >
+                  <MessageSquare size={18} /> Contact Seller
+                </button>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-             {isOwner ? (
-          <p className="text-xs text-gray-500 italic w-full text-center">
-            This is your product
-          </p>
-        ) : (
-          <>
-            <button 
-              onClick={handleAddToCart}
-              className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
-            >
-              Add to Cart
-            </button>
-
-            
-          </>
-        )}
-           
+              {isOwner ? (
+                <p className="text-xs text-gray-500 italic w-full text-center">
+                  This is your product
+                </p>
+              ) : (
+                <button 
+                  onClick={handleAddToCart}
+                  className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
+                >
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>

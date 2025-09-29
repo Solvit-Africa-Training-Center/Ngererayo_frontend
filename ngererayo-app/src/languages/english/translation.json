@@ -34,7 +34,44 @@
 
 
   "meetOurConsultants": "Meet Our Consultants",
-  "whatOurCommunitySays": "What Our Community Says"
+  "whatOurCommunitySays": "What Our Community Says",
+
+  
+  "loginTitle": "Login to your Account",
+  "loginSubtitle": "Enter your email and password",
+  "continueWithGoogle": "Continue with Google",
+  "orLogin": "Or login with email",
+  "emailPlaceholder": "Email Address",
+  "passwordPlaceholder": "Password",
+  "rememberMe": "Remember me",
+  "forgotPassword": "Forgot password?",
+  "loginButton": "Login",
+  "noAccount": "Don’t have an account?",
+  "createAccount": "Create one",
+  "invalidCredentials": "Invalid email or password",
+
+
+  "registerTitle": "Create your Account",
+  "registerSubtitle": "Enter your details to get started",
+  "continueWithGoogle": "Continue with Google",
+  "orRegisterWithEmail": "Or create with email",
+  "usernamePlaceholder": "Username",
+  "firstNamePlaceholder": "First Name",
+  "lastNamePlaceholder": "Last Name",
+  "emailPlaceholder": "Email Address",
+  "phonePlaceholder": "Phone Number",
+  "passwordPlaceholder": "Create a strong password",
+  "confirmPasswordPlaceholder": "Confirm Password",
+  "backButton": "Back",
+  "createAccountButton": "Create Account",
+  "alreadyHaveAccount": "If you already have an account",
+  "loginLink": "login",
+  "passwordMismatch": "Passwords do not match",
+  "accountCreated": "Account created successfully!",
+  "registrationFailed": "Registration failed"
+
+
+
 }
 
 
